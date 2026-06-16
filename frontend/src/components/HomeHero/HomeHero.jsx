@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./HomeHero.css";
 
 
@@ -47,18 +48,19 @@ export default function HomeHero() {
 
         <div className="hero-actions">
           <div className="hero-actions-row">
-            <button type="button" className="hero-btn">
+            <Link to="/individual-register" className="hero-btn">
               تسجيل الأفراد
-            </button>
-            <button type="button" className="hero-btn">
+            </Link>
+            <Link to="/sponsor-register" className="hero-btn">
               تسجيل الرعاة
-            </button>
+            </Link>
           </div>
-          <button type="button" className="hero-btn">
+          <a href="#speakers" className="hero-btn">
             عرض البث المرئي
-          </button>
+          </a>
         </div>
       </div>
     </section>
   );
 }
+

@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap");
+
+/* ===== قسم المتحدثون ===== */
+.speakers-section {
+  font-family: "Cairo", system-ui, "Segoe UI", sans-serif;
+  background-color: #eaf5ec;
+  scroll-margin-top: 96px; /* تعويض ارتفاع الهيدر عند التمرير */
+  padding-top: 80px;
+  padding-bottom: 90px;
+}
+
+/* ===== العنوان ===== */
+.speakers-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.speakers-accent {
+  width: 4px;
+  height: 38px;
+  margin-bottom: 1rem;
+  border-radius: 999px;
+  background-color: #2f8f46;
+}
+
+.speakers-title {
+  margin: 0;
+  color: #1c3b25;
+  font-weight: 700;
+  font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+}
+
+/* ===== مسار البطاقات (كاروسيل أفقي بدون مكتبات) ===== */
+.speakers-track {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1.75rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem; /* مساحة أسفل البطاقات بعيداً عن شريط التمرير */
+
+  /* إخفاء شريط التمرير - Firefox */
+  scrollbar-width: none;
+  /* إخفاء شريط التمرير - IE/Edge القديم */
+  -ms-overflow-style: none;
+}
+
+/* إخفاء شريط التمرير - Chrome / Safari / Edge */
+.speakers-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===== بطاقة المتحدث ===== */
+.speaker-card {
+  flex: 0 0 280px; /* عرض ثابت؛ لا تتقلص ولا تلتف لسطر جديد */
+  max-width: 280px;
+  scroll-snap-align: start;
+  background-color: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 14px 32px rgba(28, 59, 37, 0.12);
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+
+.speaker-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 22px 44px rgba(28, 59, 37, 0.22);
+}
+
+.speaker-image-wrap {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.speaker-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(100%);
+  transition: filter 0.28s ease, transform 0.28s ease;
+}
+
+.speaker-card:hover .speaker-image {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+/* ===== الشريط السفلي الملوّن ===== */
+.speaker-info {
+  background-color: #21363b;
+  color: #ffffff;
+  padding: 1.1rem 1.25rem;
+  text-align: center;
+  border-top: 4px solid #7ac17d;
+}
+
+.speaker-name {
+  margin: 0 0 0.35rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.speaker-role {
+  margin: 0;
+  font-weight: 400;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: rgba(230, 237, 239, 0.82);
+}
+
+/* ===== الاستجابة ===== */
+@media (max-width: 575.98px) {
+  .speakers-section {
+    padding-top: 60px;
+    padding-bottom: 70px;
+  }
+
+  .speaker-card {
+    flex-basis: 78%;
+    max-width: 78%;
+    scroll-snap-align: center;
+  }
+}

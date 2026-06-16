@@ -110,6 +110,26 @@
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
 }
 
+/* موضع القائمة عند فتحها (التحكم عبر React بدل Popper) */
+/* على الشاشات الكبيرة: قائمة عائمة أسفل الرابط */
+@media (min-width: 992px) {
+  .site-navbar .dropdown-menu.site-dropdown.show {
+    position: absolute;
+    top: 100%;
+    right: 0;       /* محاذاة لليمين في الاتجاه RTL */
+    left: auto;
+    margin-top: 0.25rem;
+    z-index: 1031;  /* أعلى من سياق التكديس الخاص بالهيدر */
+  }
+}
+/* على الجوال: تظهر ضمن التدفق الطبيعي للقائمة المنسدلة */
+@media (max-width: 991.98px) {
+  .site-navbar .dropdown-menu.site-dropdown.show {
+    position: static;
+    margin-top: 0.25rem;
+  }
+}
+
 .site-dropdown .dropdown-item {
   color: #e6edef;
   font-size: 0.92rem;

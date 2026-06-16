@@ -1,0 +1,218 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap");
+
+/* ===== الهيرو ===== */
+.sponsor-hero {
+  position: relative;
+  font-family: "Cairo", system-ui, "Segoe UI", sans-serif;
+  background-color: #4c5d62;
+  color: #ffffff;
+  overflow: hidden;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.sponsor-hero-pattern {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 48%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.5;
+  -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 100%);
+}
+
+.sponsor-hero-pattern svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.sponsor-hero-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 760px;
+}
+
+.sponsor-hero-title {
+  font-weight: 700;
+  font-size: clamp(1.9rem, 3.4vw, 3rem);
+  line-height: 1.5;
+  color: #ffffff;
+  margin: 0 0 1rem;
+}
+
+.sponsor-hero-subtitle {
+  font-size: clamp(0.98rem, 1.4vw, 1.15rem);
+  font-weight: 400;
+  line-height: 2;
+  color: #e6edef;
+  margin: 0 auto;
+}
+
+/* ===== قسم النموذج ===== */
+.sponsor-form-section {
+  font-family: "Cairo", system-ui, "Segoe UI", sans-serif;
+  background-color: #f3f6f6;
+  padding-top: 64px;
+  padding-bottom: 90px;
+}
+
+.sponsor-card {
+  max-width: 720px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 22px;
+  box-shadow: 0 18px 50px rgba(33, 54, 59, 0.14);
+  padding: clamp(1.6rem, 4vw, 3rem);
+  margin-top: -120px;
+  position: relative;
+  z-index: 3;
+}
+
+.sponsor-card-title {
+  font-weight: 700;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  color: #21363b;
+  text-align: center;
+  margin: 0 0 0.5rem;
+}
+
+.sponsor-card-desc {
+  text-align: center;
+  color: #6b7b7f;
+  font-size: 0.98rem;
+  line-height: 1.8;
+  margin: 0 0 1.8rem;
+}
+
+.sponsor-alert {
+  background-color: rgba(122, 193, 125, 0.15);
+  border: 1px solid #7ac17d;
+  color: #2f5e32;
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 1.6rem;
+}
+
+/* ===== الحقول ===== */
+.sponsor-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.sponsor-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.sponsor-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.sponsor-field label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #21363b;
+}
+
+.sponsor-field input,
+.sponsor-field select,
+.sponsor-field textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  color: #21363b;
+  background-color: #f9fbfb;
+  border: 1.6px solid #dce5e6;
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sponsor-field textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.sponsor-field input::placeholder,
+.sponsor-field textarea::placeholder {
+  color: #9bacad;
+}
+
+.sponsor-field input:focus,
+.sponsor-field select:focus,
+.sponsor-field textarea:focus {
+  outline: none;
+  border-color: #7ac17d;
+  box-shadow: 0 0 0 4px rgba(122, 193, 125, 0.18);
+  background-color: #ffffff;
+}
+
+.sponsor-field input.is-invalid {
+  border-color: #e05757;
+  box-shadow: 0 0 0 4px rgba(224, 87, 87, 0.12);
+}
+
+.sponsor-error {
+  color: #d23c3c;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+/* ===== زر الإرسال ===== */
+.sponsor-submit {
+  margin-top: 0.5rem;
+  border: none;
+  background-color: #21363b;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  border-radius: 12px;
+  padding: 0.95rem 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.sponsor-submit:hover {
+  background-color: #7ac17d;
+  color: #21363b;
+  transform: translateY(-1px);
+}
+
+.sponsor-submit:active {
+  transform: translateY(0);
+}
+
+/* ===== الاستجابة ===== */
+@media (max-width: 767.98px) {
+  .sponsor-hero {
+    padding-top: 55px;
+    padding-bottom: 95px;
+  }
+
+  .sponsor-hero-pattern {
+    width: 75%;
+    opacity: 0.3;
+  }
+
+  .sponsor-row {
+    grid-template-columns: 1fr;
+  }
+
+  .sponsor-card {
+    margin-top: -70px;
+  }
+}

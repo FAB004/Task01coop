@@ -27,5 +27,8 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+// SPA fallback: serve the React shell for client-side routes
+// (e.g. /sponsor-register) so deep-links and refresh don't 404.
+app.MapFallbackToController("Index", "Home");
 
 app.Run();

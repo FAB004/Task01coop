@@ -1,14 +1,18 @@
 import './App.css'
-import Header from './components/Header/Header';
-import HomeHero from './components/HomeHero/HomeHero';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import SponsorRegister from './pages/SponsorRegister';
+import IndividualRegister from './pages/IndividualRegister';
 
 function App() {
   return (
-    <div className="app-page" dir="rtl">
-      <Header />
-      <HomeHero />
-      
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/sponsor-register" element={<SponsorRegister />} />
+      <Route path="/individual-register" element={<IndividualRegister />} />
+    </Routes>
   )
 }
 

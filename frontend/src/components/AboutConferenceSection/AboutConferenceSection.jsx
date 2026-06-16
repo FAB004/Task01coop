@@ -1,0 +1,41 @@
+import "./AboutConferenceSection.css";
+
+const PATTERN_LINES = Array.from({ length: 36 }, (_, i) => {
+  const baseX = 6 + i * 13;
+  const amp = 22 + (i % 6) * 5;
+  const phase = i * 0.5;
+  let d = `M ${baseX} -20`;
+  for (let y = 0; y <= 820; y += 22) {
+    const x = baseX + Math.sin(y / 135 + phase) * amp;
+    d += ` L ${x.toFixed(1)} ${y}`;
+  }
+  return d;
+});
+
+export default function AboutConferenceSection() {
+  return (
+    <section className="about-section" dir="rtl">
+      <div className="container">
+        <header className="about-section-head">
+          <h2 className="about-section-title">عن المؤتمر</h2>
+          <span className="about-section-divider" aria-hidden="true" />
+        </header>
+
+        <div className="about-section-card">
+          <p className="about-section-text">
+            يُعد المؤتمر الإقليمي الأول للري والصرف الزراعي بالشرق الأوسط منصةً
+            علميةً ومهنيةً رائدةً تجمع نخبةً من الخبراء والمختصين وصنّاع القرار من
+            مختلف دول المنطقة، بهدف مناقشة التحديات المتزايدة التي تواجه قطاع
+            المياه والري، واستعراض أحدث الحلول والتقنيات المستدامة في مجال
+            الإدارة المتكاملة للموارد المائية. ويسعى المؤتمر إلى تعزيز التعاون
+            الإقليمي وتبادل الخبرات والمعارف بما يدعم تحقيق تنميةٍ زراعيةٍ مرنةٍ
+            ومستدامةٍ قادرةٍ على مواجهة آثار التغير المناخي وندرة المياه. كما
+            يوفّر المؤتمر فرصةً لعرض المشروعات الناجحة والممارسات الفضلى، وبناء
+            شراكاتٍ استراتيجيةٍ بين القطاعين العام والخاص، بما يسهم في رسم ملامح
+            مستقبلٍ أكثر استدامةً لقطاع الري والصرف الزراعي في الشرق الأوسط.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}

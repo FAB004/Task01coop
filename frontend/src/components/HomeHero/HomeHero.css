@@ -81,6 +81,12 @@
 }
 
 .hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
   border: 1.5px solid #0dcaf0;
   color: #e9eff0;
   background-color: transparent;

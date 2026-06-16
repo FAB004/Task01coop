@@ -1,5 +1,41 @@
+import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 import logo from "../../assets/Logo01.png";
 import "./Header.css";
+
+function NavDropdown({ label, children }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  // close when clicking outside this dropdown
+  useEffect(() => {
+    const onDoc = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("click", onDoc);
+    return () => document.removeEventListener("click", onDoc);
+  }, []);
+
+  return (
+    <li className="nav-item dropdown" ref={ref}>
+      <a
+        className="nav-link dropdown-toggle"
+        href="#"
+        role="button"
+        aria-expanded={open}
+        onClick={(e) => {
+          e.preventDefault();
+          setOpen((o) => !o);
+        }}
+      >
+        {label}
+      </a>
+      <ul className={`dropdown-menu site-dropdown ${open ? "show" : ""}`} dir="rtl">
+        {children}
+      </ul>
+    </li>
+  );
+}
 
 export default function Header() {
   return (
@@ -7,12 +43,9 @@ export default function Header() {
       <nav className="navbar navbar-expand-lg site-navbar">
         <div className="container-fluid header-inner">
           {/* ===== الشعار (يمين) ===== */}
-          <a className="navbar-brand brand" href="#">
+          <Link className="navbar-brand brand" to="/">
             <img src={logo} className="brand-icon" alt="شعار المؤتمر" />
-          
-            
-            
-          </a>
+          </Link>
 
           {/* زر القائمة للجوال */}
           <button
@@ -31,59 +64,40 @@ export default function Header() {
           <div className="collapse navbar-collapse" id="mainNav">
             <ul className="navbar-nav nav-list mx-auto">
               <li className="nav-item">
-                <a className="nav-link active" href="#">
+                <Link className="nav-link active" to="/">
                   الرئيسية
-                </a>
+                </Link>
               </li>
 
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  المؤتمر
-                </a>
-                <ul className="dropdown-menu site-dropdown" dir="rtl">
-                  <li><a className="dropdown-item" href="#">عن المؤتمر</a></li>
-                  <li><a className="dropdown-item" href="#">أهداف المؤتمر</a></li>
-                  <li><a className="dropdown-item" href="#">محاور المؤتمر</a></li>
-                </ul>
-              </li>
+              <NavDropdown label="المؤتمر">
+                <li><Link className="dropdown-item" to="/about">عن المؤتمر</Link></li>
+                <li><a className="dropdown-item" href="#">أهداف المؤتمر</a></li>
+                <li><a className="dropdown-item" href="#">محاور المؤتمر</a></li>
+              </NavDropdown>
 
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  المركز الاعلامي
-                </a>
-                <ul className="dropdown-menu site-dropdown" dir="rtl">
-                  <li><a className="dropdown-item" href="#">الصور</a></li>
-                  <li><a className="dropdown-item" href="#">الفيديوهات</a></li>
-                  <li><a className="dropdown-item" href="#">الأخبار</a></li>
-                </ul>
-              </li>
+              <NavDropdown label="المركز الاعلامي">
+                <li><a className="dropdown-item" href="#">الصور</a></li>
+                <li><a className="dropdown-item" href="#">الفيديوهات</a></li>
+                <li><a className="dropdown-item" href="#">الأخبار</a></li>
+              </NavDropdown>
 
               <li className="nav-item">
                 <a className="nav-link" href="#">الزيارة الميدانية</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">الرعاة</a>
+                <Link className="nav-link" to="/individual-register">تسجيل الأفراد</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/sponsor-register">تسجيل الرعاة</Link>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#">المعرض</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">الأجندة</a>
+                <a className="nav-link" href="#agenda">الأجندة</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">المتحدثون</a>
+                <a className="nav-link" href="#speakers">المتحدثون</a>
               </li>
             </ul>
 
