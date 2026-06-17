@@ -1,16 +1,5 @@
 import "./AboutConferenceSection.css";
 
-const PATTERN_LINES = Array.from({ length: 36 }, (_, i) => {
-  const baseX = 6 + i * 13;
-  const amp = 22 + (i % 6) * 5;
-  const phase = i * 0.5;
-  let d = `M ${baseX} -20`;
-  for (let y = 0; y <= 820; y += 22) {
-    const x = baseX + Math.sin(y / 135 + phase) * amp;
-    d += ` L ${x.toFixed(1)} ${y}`;
-  }
-  return d;
-});
 
 export default function AboutConferenceSection() {
   return (

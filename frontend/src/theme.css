@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap");
+
+/* =========================================================
+   طبقة سمة Bootstrap للمؤتمر
+   تُعيد توجيه متغيّرات Bootstrap CSS إلى ألوان وخطوط المؤتمر،
+   حتى تظهر مكوّنات Bootstrap (الأزرار، النماذج، الأكورديون،
+   الكاروسيل...) بنفس هوية الموقع.
+   ========================================================= */
+:root {
+  /* لوحة ألوان المؤتمر */
+  --conf-teal: #21363b;
+  --conf-teal-2: #4c5d62;
+  --conf-teal-dark: #1a2c30;
+  --conf-green: #7ac17d;
+  --conf-green-strong: #2f8f46;
+  --conf-cyan: #0dcaf0;
+
+  /* الخط الافتراضي للموقع */
+  --bs-body-font-family: "Cairo", system-ui, "Segoe UI", sans-serif;
+
+  /* ربط ألوان Bootstrap الأساسية بلوحة المؤتمر */
+  --bs-primary: #21363b;
+  --bs-primary-rgb: 33, 54, 59;
+  --bs-success: #2f8f46;
+  --bs-success-rgb: 47, 143, 70;
+  --bs-info: #0dcaf0;
+  --bs-info-rgb: 13, 202, 240;
+}
+
+/* ===== الأزرار الأساسية (teal) ===== */
+.btn-primary {
+  --bs-btn-bg: var(--conf-teal);
+  --bs-btn-border-color: var(--conf-teal);
+  --bs-btn-hover-bg: var(--conf-green);
+  --bs-btn-hover-border-color: var(--conf-green);
+  --bs-btn-hover-color: var(--conf-teal);
+  --bs-btn-active-bg: var(--conf-green);
+  --bs-btn-active-border-color: var(--conf-green);
+  --bs-btn-active-color: var(--conf-teal);
+  --bs-btn-focus-shadow-rgb: 122, 193, 125;
+}
+
+/* زر الهيرو ذو الإطار السماوي */
+.btn-outline-info {
+  --bs-btn-color: #e9eff0;
+  --bs-btn-border-color: var(--conf-cyan);
+  --bs-btn-hover-bg: var(--conf-cyan);
+  --bs-btn-hover-border-color: var(--conf-cyan);
+  --bs-btn-hover-color: #16343a;
+  --bs-btn-active-bg: var(--conf-cyan);
+  --bs-btn-active-color: #16343a;
+}
+
+/* زر التنقّل الأخضر (أسهم الكاروسيل ونحوها) */
+.btn-outline-success {
+  --bs-btn-color: var(--conf-green-strong);
+  --bs-btn-border-color: var(--conf-green-strong);
+  --bs-btn-hover-bg: var(--conf-green-strong);
+  --bs-btn-hover-border-color: var(--conf-green-strong);
+  --bs-btn-hover-color: #ffffff;
+}
+
+/* ===== حقول النماذج: تركيز بلون المؤتمر الأخضر ===== */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--conf-green);
+  box-shadow: 0 0 0 0.25rem rgba(122, 193, 125, 0.25);
+}
+
+/* ===== تنبيه النجاح بلون المؤتمر ===== */
+.alert-conf-success {
+  --bs-alert-color: #2f5e32;
+  --bs-alert-bg: rgba(122, 193, 125, 0.15);
+  --bs-alert-border-color: var(--conf-green);
+}

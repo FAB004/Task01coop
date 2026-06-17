@@ -1,16 +1,32 @@
+import { useRef } from "react";
+import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import "./SpeakersSection.css";
 
+// بيانات المتحدثين — أضف عنصراً جديداً ليظهر تلقائياً في القائمة.
+// اترك "image" فارغاً الآن؛ يمكنك إضافة رابط الصورة لاحقاً.
 const SPEAKERS = [
-  { name: ".  ", title: "خبير إدارة الموارد المائية" },
-  { name: "م", title: "استشارية تقنيات الري الحديثة" },
-  { name: "د.  ", title: "أستاذ هندسة الري والصرف" },
-  { name: "م.  ", title: "مديرة مشاريع الاستدامة البيئية" },
+  { name: "", title: "خبير إدارة الموارد المائية", image: "" },
+  { name: "", title: "استشارية تقنيات الري الحديثة", image: "" },
+  { name: "د. خالد المطيري", title: "أستاذ هندسة الري والصرف", image: "" },
+  { name: "م. نورة القحطاني", title: "مديرة مشاريع الاستدامة البيئية", image: "" },
+  { name: "د. فهد الشهري", title: "باحث في كفاءة استهلاك المياه", image: "" },
+  { name: "م. ريم الغامدي", title: "مهندسة نظم الصرف الزراعي", image: "" },
 ];
 
-// صورة بديلة لكل متحدث بناءً على الترتيب
-const getSpeakerImage = (index) => `https://i.pravatar.cc/300?img=${index + 1}`;
+// الأحرف الأولى من الاسم تظهر داخل الصورة البديلة عند غياب الصورة
+const getInitials = (name) =>
+  (name || "").replace(/^(د\.|م\.|أ\.)\s*/, "").trim().charAt(0) || "؟";
 
-export default function SpeakersSection() {
+export default function SpeakersSection({ speakers = SPEAKERS }) {
+  const trackRef = useRef(null);
+
+  // تمرير المسار بمقدار ~80% من عرضه (يتكيّف مع الاتجاه RTL تلقائياً)
+  const scrollByCards = (direction) => {
+    const track = trackRef.current;
+    if (!track) return;
+    track.scrollBy({ left: direction * track.clientWidth * 0.8, behavior: "smooth" });
+  };
+
   return (
     <section id="speakers" className="speakers-section" dir="rtl">
       <div className="container">
@@ -19,23 +35,52 @@ export default function SpeakersSection() {
           <h2 className="speakers-title">المتحدثون</h2>
         </header>
 
-        <div className="speakers-track">
-          {SPEAKERS.map((speaker, index) => (
-            <article className="speaker-card" key={speaker.name}>
+        {/* مسار أفقي قابل للتمرير (يمين ← يسار) بدون أي مكتبات */}
+        <div className="speakers-track" role="list" ref={trackRef}>
+          {speakers.map((speaker, index) => (
+            <article className="speaker-card" role="listitem" key={index}>
               <div className="speaker-image-wrap">
-                <img
-                  className="speaker-image"
-                  src={getSpeakerImage(index)}
-                  alt={speaker.name}
-                  loading="lazy"
-                />
+                {speaker.image ? (
+                  <img
+                    className="speaker-image"
+                    src={speaker.image}
+                    alt={speaker.name}
+                    loading="lazy"
+                  />
+                ) : (
+                  // صورة بديلة فارغة — تُستبدل لاحقاً بصورة المتحدث
+                  <span className="speaker-image-placeholder" aria-hidden="true">
+                    {getInitials(speaker.name)}
+                  </span>
+                )}
               </div>
+
               <div className="speaker-info">
                 <h3 className="speaker-name">{speaker.name}</h3>
                 <p className="speaker-role">{speaker.title}</p>
               </div>
             </article>
           ))}
+        </div>
+
+        {/* أزرار التنقّل أسفل المتحدثين: يمين / يسار */}
+        <div className="speakers-controls">
+          <button
+            type="button"
+            className="speakers-nav"
+            onClick={() => scrollByCards(1)}
+            aria-label="السابق"
+          >
+            <FaChevronRight aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            className="speakers-nav"
+            onClick={() => scrollByCards(-1)}
+            aria-label="التالي"
+          >
+            <FaChevronLeft aria-hidden="true" />
+          </button>
         </div>
       </div>
     </section>

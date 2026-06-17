@@ -91,109 +91,37 @@
   margin: 0 0 1.8rem;
 }
 
-.sponsor-alert {
-  background-color: rgba(122, 193, 125, 0.15);
-  border: 1px solid #7ac17d;
-  color: #2f5e32;
-  border-radius: 12px;
-  padding: 0.9rem 1.1rem;
-  text-align: center;
-  font-weight: 600;
-  margin-bottom: 1.6rem;
-}
-
-/* ===== الحقول ===== */
-.sponsor-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-.sponsor-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.2rem;
-}
-
-.sponsor-field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-}
-
-.sponsor-field label {
+/* ===== إعادة تنسيق حقول Bootstrap لتطابق التصميم الأصلي ===== */
+.sponsor-card .form-label {
   font-weight: 600;
   font-size: 0.95rem;
   color: #21363b;
+  margin-bottom: 0.45rem;
 }
 
-.sponsor-field input,
-.sponsor-field select,
-.sponsor-field textarea {
-  font-family: inherit;
+.sponsor-card .form-control,
+.sponsor-card .form-select {
   font-size: 1rem;
   color: #21363b;
   background-color: #f9fbfb;
   border: 1.6px solid #dce5e6;
   border-radius: 12px;
   padding: 0.8rem 1rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  width: 100%;
-  box-sizing: border-box;
 }
 
-.sponsor-field textarea {
-  resize: vertical;
+.sponsor-card textarea.form-control {
   min-height: 110px;
 }
 
-.sponsor-field input::placeholder,
-.sponsor-field textarea::placeholder {
+.sponsor-card .form-control::placeholder {
   color: #9bacad;
 }
 
-.sponsor-field input:focus,
-.sponsor-field select:focus,
-.sponsor-field textarea:focus {
-  outline: none;
-  border-color: #7ac17d;
-  box-shadow: 0 0 0 4px rgba(122, 193, 125, 0.18);
-  background-color: #ffffff;
-}
-
-.sponsor-field input.is-invalid {
-  border-color: #e05757;
-  box-shadow: 0 0 0 4px rgba(224, 87, 87, 0.12);
-}
-
-.sponsor-error {
-  color: #d23c3c;
-  font-size: 0.82rem;
-  font-weight: 500;
-}
-
-/* ===== زر الإرسال ===== */
-.sponsor-submit {
-  margin-top: 0.5rem;
-  border: none;
-  background-color: #21363b;
-  color: #ffffff;
+/* زر الإرسال (teal → أخضر عند المرور) */
+.sponsor-card .sponsor-submit {
   font-weight: 700;
-  font-size: 1.05rem;
   border-radius: 12px;
   padding: 0.95rem 1.5rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.15s ease;
-}
-
-.sponsor-submit:hover {
-  background-color: #7ac17d;
-  color: #21363b;
-  transform: translateY(-1px);
-}
-
-.sponsor-submit:active {
-  transform: translateY(0);
 }
 
 /* ===== الاستجابة ===== */
@@ -206,10 +134,6 @@
   .sponsor-hero-pattern {
     width: 75%;
     opacity: 0.3;
-  }
-
-  .sponsor-row {
-    grid-template-columns: 1fr;
   }
 
   .sponsor-card {

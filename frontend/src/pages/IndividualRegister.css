@@ -91,109 +91,36 @@
   margin: 0 0 1.8rem;
 }
 
-.individual-alert {
-  background-color: rgba(122, 193, 125, 0.15);
-  border: 1px solid #7ac17d;
-  color: #2f5e32;
-  border-radius: 12px;
-  padding: 0.9rem 1.1rem;
-  text-align: center;
-  font-weight: 600;
-  margin-bottom: 1.6rem;
-}
-
-/* ===== الحقول ===== */
-.individual-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-.individual-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.2rem;
-}
-
-.individual-field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-}
-
-.individual-field label {
+/* ===== إعادة تنسيق حقول Bootstrap لتطابق التصميم الأصلي ===== */
+.individual-card .form-label {
   font-weight: 600;
   font-size: 0.95rem;
   color: #21363b;
+  margin-bottom: 0.45rem;
 }
 
-.individual-field input,
-.individual-field select,
-.individual-field textarea {
-  font-family: inherit;
+.individual-card .form-control,
+.individual-card .form-select {
   font-size: 1rem;
   color: #21363b;
   background-color: #f9fbfb;
   border: 1.6px solid #dce5e6;
   border-radius: 12px;
   padding: 0.8rem 1rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  width: 100%;
-  box-sizing: border-box;
 }
 
-.individual-field textarea {
-  resize: vertical;
+.individual-card textarea.form-control {
   min-height: 110px;
 }
 
-.individual-field input::placeholder,
-.individual-field textarea::placeholder {
+.individual-card .form-control::placeholder {
   color: #9bacad;
 }
 
-.individual-field input:focus,
-.individual-field select:focus,
-.individual-field textarea:focus {
-  outline: none;
-  border-color: #7ac17d;
-  box-shadow: 0 0 0 4px rgba(122, 193, 125, 0.18);
-  background-color: #ffffff;
-}
-
-.individual-field input.is-invalid {
-  border-color: #e05757;
-  box-shadow: 0 0 0 4px rgba(224, 87, 87, 0.12);
-}
-
-.individual-error {
-  color: #d23c3c;
-  font-size: 0.82rem;
-  font-weight: 500;
-}
-
-/* ===== زر التسجيل ===== */
-.individual-submit {
-  margin-top: 0.5rem;
-  border: none;
-  background-color: #21363b;
-  color: #ffffff;
+.individual-card .individual-submit {
   font-weight: 700;
-  font-size: 1.05rem;
   border-radius: 12px;
   padding: 0.95rem 1.5rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.15s ease;
-}
-
-.individual-submit:hover {
-  background-color: #7ac17d;
-  color: #21363b;
-  transform: translateY(-1px);
-}
-
-.individual-submit:active {
-  transform: translateY(0);
 }
 
 /* ===== الاستجابة ===== */
@@ -206,10 +133,6 @@
   .individual-hero-pattern {
     width: 75%;
     opacity: 0.3;
-  }
-
-  .individual-row {
-    grid-template-columns: 1fr;
   }
 
   .individual-card {

@@ -69,11 +69,7 @@ export default function IndividualRegister() {
       {/* ===== الهيرو ===== */}
       <section className="individual-hero" dir="rtl">
         <div className="individual-hero-pattern" aria-hidden="true">
-          <svg
-            viewBox="0 0 470 800"
-            preserveAspectRatio="xMaxYMid slice"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg viewBox="0 0 470 800" preserveAspectRatio="xMaxYMid slice" xmlns="http://www.w3.org/2000/svg">
             <g fill="none" stroke="#6fb6c2" strokeWidth="1.4" strokeLinecap="round">
               {PATTERN_LINES.map((d, idx) => (
                 <path key={idx} d={d} />
@@ -95,119 +91,123 @@ export default function IndividualRegister() {
       {/* ===== نموذج التسجيل ===== */}
       <section className="individual-form-section" dir="rtl">
         <div className="container">
-          <div className="individual-card">
-            <h2 className="individual-card-title">نموذج تسجيل فردي</h2>
-            <p className="individual-card-desc">
-              يرجى تعبئة البيانات التالية لإتمام عملية التسجيل في المؤتمر.
-            </p>
+          <div className="individual-card card border-0">
+            <div className="card-body p-0">
+              <h2 className="individual-card-title">نموذج تسجيل فردي</h2>
+              <p className="individual-card-desc">
+                يرجى تعبئة البيانات التالية لإتمام عملية التسجيل في المؤتمر.
+              </p>
 
-            {submitted && (
-              <div className="individual-alert" role="status">
-                تم تسجيلك بنجاح! نتطلع لرؤيتك في المؤتمر.
-              </div>
-            )}
+              {submitted && (
+                <div className="alert alert-conf-success text-center fw-semibold" role="status">
+                  تم تسجيلك بنجاح! نتطلع لرؤيتك في المؤتمر.
+                </div>
+              )}
 
-            <form className="individual-form" onSubmit={handleSubmit} noValidate>
-              <div className="individual-field">
-                <label htmlFor="name">الاسم الكامل *</label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  value={form.name}
-                  onChange={handleChange}
-                  placeholder="أدخل اسمك الكامل"
-                  className={errors.name ? "is-invalid" : ""}
-                />
-                {errors.name && <span className="individual-error">{errors.name}</span>}
-              </div>
+              <form className="row g-3" onSubmit={handleSubmit} noValidate>
+                <div className="col-12">
+                  <label htmlFor="name" className="form-label">الاسم الكامل *</label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    className={`form-control ${errors.name ? "is-invalid" : ""}`}
+                    value={form.name}
+                    onChange={handleChange}
+                    placeholder="أدخل اسمك الكامل"
+                  />
+                  {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+                </div>
 
-              <div className="individual-row">
-                <div className="individual-field">
-                  <label htmlFor="email">البريد الإلكتروني *</label>
+                <div className="col-md-6">
+                  <label htmlFor="email" className="form-label">البريد الإلكتروني *</label>
                   <input
                     id="email"
                     name="email"
                     type="email"
+                    dir="ltr"
+                    className={`form-control ${errors.email ? "is-invalid" : ""}`}
                     value={form.email}
                     onChange={handleChange}
                     placeholder="name@example.com"
-                    dir="ltr"
-                    className={errors.email ? "is-invalid" : ""}
                   />
-                  {errors.email && <span className="individual-error">{errors.email}</span>}
+                  {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                 </div>
 
-                <div className="individual-field">
-                  <label htmlFor="phone">رقم الجوال *</label>
+                <div className="col-md-6">
+                  <label htmlFor="phone" className="form-label">رقم الجوال *</label>
                   <input
                     id="phone"
                     name="phone"
                     type="tel"
+                    dir="ltr"
+                    className={`form-control ${errors.phone ? "is-invalid" : ""}`}
                     value={form.phone}
                     onChange={handleChange}
                     placeholder="+966 5X XXX XXXX"
-                    dir="ltr"
-                    className={errors.phone ? "is-invalid" : ""}
                   />
-                  {errors.phone && <span className="individual-error">{errors.phone}</span>}
+                  {errors.phone && <div className="invalid-feedback">{errors.phone}</div>}
                 </div>
-              </div>
 
-              <div className="individual-field">
-                <label htmlFor="nationality">الجنسية</label>
-                <input
-                  id="nationality"
-                  name="nationality"
-                  type="text"
-                  value={form.nationality}
-                  onChange={handleChange}
-                  placeholder="أدخل الجنسية"
-                />
-              </div>
+                <div className="col-12">
+                  <label htmlFor="nationality" className="form-label">الجنسية</label>
+                  <input
+                    id="nationality"
+                    name="nationality"
+                    type="text"
+                    className="form-control"
+                    value={form.nationality}
+                    onChange={handleChange}
+                    placeholder="أدخل الجنسية"
+                  />
+                </div>
 
-              <div className="individual-row">
-                <div className="individual-field">
-                  <label htmlFor="organization">جهة العمل (اختياري)</label>
+                <div className="col-md-6">
+                  <label htmlFor="organization" className="form-label">جهة العمل (اختياري)</label>
                   <input
                     id="organization"
                     name="organization"
                     type="text"
+                    className="form-control"
                     value={form.organization}
                     onChange={handleChange}
                     placeholder="اسم جهة العمل"
                   />
                 </div>
 
-                <div className="individual-field">
-                  <label htmlFor="jobTitle">المسمى الوظيفي (اختياري)</label>
+                <div className="col-md-6">
+                  <label htmlFor="jobTitle" className="form-label">المسمى الوظيفي (اختياري)</label>
                   <input
                     id="jobTitle"
                     name="jobTitle"
                     type="text"
+                    className="form-control"
                     value={form.jobTitle}
                     onChange={handleChange}
                     placeholder="المسمى الوظيفي"
                   />
                 </div>
-              </div>
 
-              <div className="individual-field">
-                <label htmlFor="reason">سبب الحضور</label>
-                <textarea
-                  id="reason"
-                  name="reason"
-                  rows="4"
-                  value={form.reason}
-                  onChange={handleChange}
-                  placeholder="اذكر سبب رغبتك في حضور المؤتمر..."
-                />
-              </div>
+                <div className="col-12">
+                  <label htmlFor="reason" className="form-label">سبب الحضور</label>
+                  <textarea
+                    id="reason"
+                    name="reason"
+                    rows="4"
+                    className="form-control"
+                    value={form.reason}
+                    onChange={handleChange}
+                    placeholder="اذكر سبب رغبتك في حضور المؤتمر..."
+                  />
+                </div>
 
-              <button type="submit" className="individual-submit">
-                تسجيل
-              </button>
-            </form>
+                <div className="col-12">
+                  <button type="submit" className="btn btn-primary btn-lg w-100 individual-submit">
+                    تسجيل
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </section>

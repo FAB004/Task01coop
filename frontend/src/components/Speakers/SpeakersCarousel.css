@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap");
+
+/* ===== القسم ===== */
+.carousel-section {
+  font-family: "Cairo", system-ui, "Segoe UI", sans-serif;
+  padding-block: 2rem;
+}
+
+/* ===== الحاوية: تُخفي الفائض ===== */
+.carousel-container {
+  overflow: hidden;
+}
+
+/* ===== المسار القابل للتمرير (يمين ← يسار عبر dir="rtl") ===== */
+.carousel-track {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1.75rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.5rem 0.25rem 1.25rem;
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE/Edge القديم */
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;                /* Chrome / Safari / Edge */
+}
+
+/* ===== البطاقة: عرض ثابت ومتساوٍ، لا تتقلص ولا تلتف ===== */
+.carousel-card {
+  flex: 0 0 240px;
+  max-width: 240px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 18px;
+  padding: 2rem 1.25rem 1.75rem;
+  box-shadow: 0 14px 32px rgba(28, 59, 37, 0.12);
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+
+.carousel-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 22px 44px rgba(28, 59, 37, 0.22);
+}
+
+/* ===== الصورة الدائرية ===== */
+.carousel-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #7ac17d;
+}
+
+.carousel-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* صورة دائرية بديلة فارغة قبل إضافة الصور */
+.carousel-avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 2.6rem;
+  color: #7ac17d;
+  background: linear-gradient(135deg, #2d4750 0%, #21363b 100%);
+  user-select: none;
+}
+
+/* ===== النص ===== */
+.carousel-name {
+  margin: 0 0 0.4rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #1c3b25;
+  min-height: 1.3rem; /* ثبات الارتفاع حتى لو كان الاسم فارغاً */
+}
+
+.carousel-title {
+  margin: 0;
+  font-weight: 400;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #5a6b60;
+}
+
+/* ===== الاستجابة ===== */
+@media (max-width: 575.98px) {
+  .carousel-card {
+    flex-basis: 72%;
+    max-width: 72%;
+    scroll-snap-align: center;
+  }
+}

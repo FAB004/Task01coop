@@ -46,16 +46,16 @@ export default function HomeHero() {
           الإداره المتكاملة لقطاع الري لتنمية مرنة ومستدامة
         </p>
 
-        <div className="hero-actions">
-          <div className="hero-actions-row">
-            <Link to="/individual-register" className="hero-btn">
+        <div className="hero-actions d-flex flex-column align-items-center gap-3">
+          <div className="hero-actions-row d-flex flex-wrap justify-content-center gap-3">
+            <Link to="/individual-register" className="btn btn-outline-info btn-lg hero-btn">
               تسجيل الأفراد
             </Link>
-            <Link to="/sponsor-register" className="hero-btn">
+            <Link to="/sponsor-register" className="btn btn-outline-info btn-lg hero-btn">
               تسجيل الرعاة
             </Link>
           </div>
-          <a href="#speakers" className="hero-btn">
+          <a href="#speakers" className="btn btn-outline-info btn-lg hero-btn">
             عرض البث المرئي
           </a>
         </div>

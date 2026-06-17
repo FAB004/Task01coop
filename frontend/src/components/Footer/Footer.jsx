@@ -32,9 +32,9 @@ export default function Footer() {
   return (
     <footer className="site-footer" dir="rtl">
       <div className="container">
-        <div className="footer-grid">
+        <div className="row g-4 pb-4">
           {/* العمود: الشعار والوصف */}
-          <div className="footer-col footer-brand">
+          <div className="footer-col footer-brand col-12 col-lg-5">
             <img src={logo} className="Logo01.png" alt="شعار المؤتمر" /> 
             <h3 className="footer-brand-title">
            المؤتمر الإقليمي الأول للري والصرف   
@@ -47,7 +47,7 @@ export default function Footer() {
           </div>
 
           {/* العمود: روابط التنقل */}
-          <nav className="footer-col footer-nav" aria-label="روابط الموقع">
+          <nav className="footer-col footer-nav col-12 col-sm-6 col-lg-3" aria-label="روابط الموقع">
             <h4 className="footer-heading">روابط سريعة</h4>
             <ul className="footer-links">
               {NAV_LINKS.map((link) => (
@@ -60,7 +60,7 @@ export default function Footer() {
             </ul>
           </nav>
 
-          <div className="footer-col footer-contact">
+          <div className="footer-col footer-contact col-12 col-sm-6 col-lg-4">
             <h4 className="footer-heading">تواصل معنا</h4>
             <ul className="footer-contact-list">
               {CONTACTS.map(({ icon: Icon, text }) => (

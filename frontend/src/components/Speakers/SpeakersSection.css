@@ -75,6 +75,9 @@
 .speaker-image-wrap {
   aspect-ratio: 1 / 1;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .speaker-image {
@@ -91,6 +94,20 @@
   transform: scale(1.05);
 }
 
+/* صورة بديلة فارغة (قبل إضافة الصور) */
+.speaker-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: clamp(2.4rem, 6vw, 3.4rem);
+  color: #7ac17d;
+  background: linear-gradient(135deg, #2d4750 0%, #21363b 100%);
+  user-select: none;
+}
+
 /* ===== الشريط السفلي الملوّن ===== */
 .speaker-info {
   background-color: #21363b;
@@ -104,6 +121,7 @@
   margin: 0 0 0.35rem;
   font-weight: 700;
   font-size: 1.1rem;
+  min-height: 1.3rem; /* يحافظ على الارتفاع حتى لو كان الاسم فارغاً */
 }
 
 .speaker-role {
@@ -112,6 +130,40 @@
   font-size: 0.88rem;
   line-height: 1.7;
   color: rgba(230, 237, 239, 0.82);
+}
+
+/* ===== أزرار التنقّل (يمين / يسار) ===== */
+.speakers-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.speakers-nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #2f8f46;
+  border: 2px solid #2f8f46;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.22s ease, color 0.22s ease, transform 0.15s ease;
+}
+
+.speakers-nav:hover,
+.speakers-nav:focus-visible {
+  background-color: #2f8f46;
+  color: #ffffff;
+  outline: none;
+}
+
+.speakers-nav:active {
+  transform: scale(0.94);
 }
 
 /* ===== الاستجابة ===== */

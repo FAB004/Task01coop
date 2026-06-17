@@ -38,13 +38,15 @@ export default function CountdownTimer({ targetDate = CONFERENCE_DATE }) {
           {time.finished ? "انطلق المؤتمر" : "الوقت المتبقي على انطلاق المؤتمر"}
         </h2>
 
-        <div className="countdown-grid">
+        <div className="countdown-grid row g-3 g-md-4 justify-content-center">
           {UNITS.map(({ key, label }) => (
-            <div className="countdown-box" key={key}>
-              <span className="countdown-value">
-                {String(time[key]).padStart(2, "0")}
-              </span>
-              <span className="countdown-label">{label}</span>
+            <div className="col-6 col-md-3" key={key}>
+              <div className="countdown-box">
+                <span className="countdown-value">
+                  {String(time[key]).padStart(2, "0")}
+                </span>
+                <span className="countdown-label">{label}</span>
+              </div>
             </div>
           ))}
         </div>

@@ -74,14 +74,10 @@ export default function SponsorRegister() {
     <div className="app-page" dir="rtl">
       <Header />
 
-      
+      {/* ===== الهيرو ===== */}
       <section className="sponsor-hero" dir="rtl">
         <div className="sponsor-hero-pattern" aria-hidden="true">
-          <svg
-            viewBox="0 0 470 800"
-            preserveAspectRatio="xMaxYMid slice"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg viewBox="0 0 470 800" preserveAspectRatio="xMaxYMid slice" xmlns="http://www.w3.org/2000/svg">
             <g fill="none" stroke="#6fb6c2" strokeWidth="1.4" strokeLinecap="round">
               {PATTERN_LINES.map((d, idx) => (
                 <path key={idx} d={d} />
@@ -103,112 +99,114 @@ export default function SponsorRegister() {
       {/* ===== نموذج التسجيل ===== */}
       <section className="sponsor-form-section" dir="rtl">
         <div className="container">
-          <div className="sponsor-card">
-            <h2 className="sponsor-card-title">نموذج طلب الرعاية</h2>
-            <p className="sponsor-card-desc">
-              يرجى تعبئة البيانات التالية وسنعاود التواصل معك في أقرب وقت.
-            </p>
+          <div className="sponsor-card card border-0">
+            <div className="card-body p-0">
+              <h2 className="sponsor-card-title">نموذج طلب الرعاية</h2>
+              <p className="sponsor-card-desc">
+                يرجى تعبئة البيانات التالية وسنعاود التواصل معك في أقرب وقت.
+              </p>
 
-            {submitted && (
-              <div className="sponsor-alert" role="status">
-                تم إرسال طلبك بنجاح! شكراً لاهتمامك بالرعاية.
-              </div>
-            )}
+              {submitted && (
+                <div className="alert alert-conf-success text-center fw-semibold" role="status">
+                  تم إرسال طلبك بنجاح! شكراً لاهتمامك بالرعاية.
+                </div>
+              )}
 
-            <form className="sponsor-form" onSubmit={handleSubmit} noValidate>
-              <div className="sponsor-field">
-                <label htmlFor="company">اسم الشركة *</label>
-                <input
-                  id="company"
-                  name="company"
-                  type="text"
-                  value={form.company}
-                  onChange={handleChange}
-                  placeholder="أدخل اسم الشركة"
-                  className={errors.company ? "is-invalid" : ""}
-                />
-                {errors.company && <span className="sponsor-error">{errors.company}</span>}
-              </div>
+              <form className="row g-3" onSubmit={handleSubmit} noValidate>
+                <div className="col-12">
+                  <label htmlFor="company" className="form-label">اسم الشركة *</label>
+                  <input
+                    id="company"
+                    name="company"
+                    type="text"
+                    className={`form-control ${errors.company ? "is-invalid" : ""}`}
+                    value={form.company}
+                    onChange={handleChange}
+                    placeholder="أدخل اسم الشركة"
+                  />
+                  {errors.company && <div className="invalid-feedback">{errors.company}</div>}
+                </div>
 
-              <div className="sponsor-field">
-                <label htmlFor="contact">اسم الشخص المسؤول *</label>
-                <input
-                  id="contact"
-                  name="contact"
-                  type="text"
-                  value={form.contact}
-                  onChange={handleChange}
-                  placeholder="الاسم الكامل"
-                  className={errors.contact ? "is-invalid" : ""}
-                />
-                {errors.contact && <span className="sponsor-error">{errors.contact}</span>}
-              </div>
+                <div className="col-12">
+                  <label htmlFor="contact" className="form-label">اسم الشخص المسؤول *</label>
+                  <input
+                    id="contact"
+                    name="contact"
+                    type="text"
+                    className={`form-control ${errors.contact ? "is-invalid" : ""}`}
+                    value={form.contact}
+                    onChange={handleChange}
+                    placeholder="الاسم الكامل"
+                  />
+                  {errors.contact && <div className="invalid-feedback">{errors.contact}</div>}
+                </div>
 
-              <div className="sponsor-row">
-                <div className="sponsor-field">
-                  <label htmlFor="email">البريد الإلكتروني *</label>
+                <div className="col-md-6">
+                  <label htmlFor="email" className="form-label">البريد الإلكتروني *</label>
                   <input
                     id="email"
                     name="email"
                     type="email"
+                    dir="ltr"
+                    className={`form-control ${errors.email ? "is-invalid" : ""}`}
                     value={form.email}
                     onChange={handleChange}
                     placeholder="name@company.com"
-                    dir="ltr"
-                    className={errors.email ? "is-invalid" : ""}
                   />
-                  {errors.email && <span className="sponsor-error">{errors.email}</span>}
+                  {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                 </div>
 
-                <div className="sponsor-field">
-                  <label htmlFor="phone">رقم الجوال *</label>
+                <div className="col-md-6">
+                  <label htmlFor="phone" className="form-label">رقم الجوال *</label>
                   <input
                     id="phone"
                     name="phone"
                     type="tel"
+                    dir="ltr"
+                    className={`form-control ${errors.phone ? "is-invalid" : ""}`}
                     value={form.phone}
                     onChange={handleChange}
                     placeholder="+966 5X XXX XXXX"
-                    dir="ltr"
-                    className={errors.phone ? "is-invalid" : ""}
                   />
-                  {errors.phone && <span className="sponsor-error">{errors.phone}</span>}
+                  {errors.phone && <div className="invalid-feedback">{errors.phone}</div>}
                 </div>
-              </div>
 
-              <div className="sponsor-field">
-                <label htmlFor="type">نوع الرعاية</label>
-                <select
-                  id="type"
-                  name="type"
-                  value={form.type}
-                  onChange={handleChange}
-                >
-                  <option value="">اختر نوع الرعاية</option>
-                  {SPONSORSHIP_TYPES.map((t) => (
-                    <option key={t} value={t}>
-                      {t}
-                    </option>
-                  ))}
-                </select>
-              </div>
+                <div className="col-12">
+                  <label htmlFor="type" className="form-label">نوع الرعاية</label>
+                  <select
+                    id="type"
+                    name="type"
+                    className="form-select"
+                    value={form.type}
+                    onChange={handleChange}
+                  >
+                    <option value="">اختر نوع الرعاية</option>
+                    {SPONSORSHIP_TYPES.map((t) => (
+                      <option key={t} value={t}>{t}</option>
+                    ))}
+                  </select>
+                </div>
 
-              <div className="sponsor-field">
-                <label htmlFor="message">رسالة إضافية</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="4"
-                  value={form.message}
-                  onChange={handleChange}
-                  placeholder="اكتب أي تفاصيل أو استفسارات إضافية..."
-                />
-              </div>
+                <div className="col-12">
+                  <label htmlFor="message" className="form-label">رسالة إضافية</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="4"
+                    className="form-control"
+                    value={form.message}
+                    onChange={handleChange}
+                    placeholder="اكتب أي تفاصيل أو استفسارات إضافية..."
+                  />
+                </div>
 
-              <button type="submit" className="sponsor-submit">
-                إرسال الطلب
-              </button>
-            </form>
+                <div className="col-12">
+                  <button type="submit" className="btn btn-primary btn-lg w-100 sponsor-submit">
+                    إرسال الطلب
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </section>

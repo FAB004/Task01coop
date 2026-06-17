@@ -80,28 +80,16 @@
   flex-wrap: wrap;
 }
 
+/* أزرار الهيرو مبنية على .btn .btn-outline-info من Bootstrap (السمة في theme.css)؛
+   نضيف هنا فقط ما لا توفّره فئات Bootstrap بدقّة: العرض الأدنى والظل عند المرور */
 .hero-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  border: 1.5px solid #0dcaf0;
-  color: #e9eff0;
-  background-color: transparent;
-  border-radius: 8px;
-  padding: 0.8rem 2rem;
-  font-weight: 500;
-  font-size: 1rem;
+  --bs-btn-border-radius: 8px;
+  --bs-btn-font-weight: 500;
   min-width: 235px;
-  transition: all 0.22s ease-in-out;
 }
 
 .hero-btn:hover,
 .hero-btn:focus {
-  background-color: #0dcaf0;
-  color: #16343a;
   box-shadow: 0 8px 20px rgba(13, 202, 240, 0.25);
 }
 

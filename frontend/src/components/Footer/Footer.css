@@ -8,18 +8,10 @@
   padding-top: 64px;
 }
 
-/* ===== الشبكة الرئيسية ===== */
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1.6fr 1fr 1.4fr;
-  gap: 2.5rem;
-  padding-bottom: 2.75rem;
-}
-
+/* ===== الأعمدة (شبكة Bootstrap) ===== */
 .footer-col {
   min-width: 0;
 }
-
 
 .footer-logo {
   height: 64px;
@@ -176,25 +168,9 @@
 }
 
 /* ===== الاستجابة ===== */
-@media (max-width: 991.98px) {
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-  }
-
-  .footer-brand {
-    grid-column: 1 / -1;
-  }
-}
-
 @media (max-width: 575.98px) {
   .site-footer {
     padding-top: 48px;
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
   }
 
   .footer-bottom {

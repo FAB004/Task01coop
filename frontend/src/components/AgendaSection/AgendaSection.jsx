@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./AgendaSection.css";
 
 const DAYS = [
@@ -30,51 +29,51 @@ const DAYS = [
 ];
 
 export default function AgendaSection() {
-  const [openDay, setOpenDay] = useState("day1");
-
-  const toggle = (id) => setOpenDay((cur) => (cur === id ? null : id));
-
   return (
     <section id="agenda" className="agenda-section" dir="rtl">
       <div className="container">
-        <header className="agenda-head">
+        <header className="agenda-head text-center mb-5">
           <span className="agenda-accent" aria-hidden="true" />
           <h2 className="agenda-title">الأجندة</h2>
         </header>
 
-        <div className="agenda-accordion">
-          {DAYS.map((day) => {
-            const isOpen = openDay === day.id;
+        {/* أكورديون Bootstrap */}
+        <div className="accordion agenda-accordion mx-auto" id="agendaAccordion">
+          {DAYS.map((day, index) => {
+            const isFirst = index === 0;
             return (
-              <div className={`agenda-panel ${isOpen ? "open" : ""}`} key={day.id}>
-                <button
-                  type="button"
-                  className="agenda-panel-header"
-                  aria-expanded={isOpen}
-                  aria-controls={`${day.id}-body`}
-                  onClick={() => toggle(day.id)}
-                >
-                  <span className="agenda-panel-titles">
-                    <span className="agenda-panel-label">{day.label}</span>
-                    <span className="agenda-panel-date">{day.date}</span>
-                  </span>
-                  <span className="agenda-panel-chevron" aria-hidden="true" />
-                </button>
-
+              <div className="accordion-item" key={day.id}>
+                <h2 className="accordion-header" id={`${day.id}-header`}>
+                  <button
+                    className={`accordion-button ${isFirst ? "" : "collapsed"}`}
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target={`#${day.id}`}
+                    aria-expanded={isFirst ? "true" : "false"}
+                    aria-controls={day.id}
+                  >
+                    <span className="d-flex flex-column gap-1">
+                      <span className="agenda-panel-label">{day.label}</span>
+                      <span className="agenda-panel-date">{day.date}</span>
+                    </span>
+                  </button>
+                </h2>
                 <div
-                  id={`${day.id}-body`}
-                  className="agenda-panel-body"
-                  role="region"
-                  hidden={!isOpen}
+                  id={day.id}
+                  className={`accordion-collapse collapse ${isFirst ? "show" : ""}`}
+                  aria-labelledby={`${day.id}-header`}
+                  data-bs-parent="#agendaAccordion"
                 >
-                  <ul className="agenda-list">
-                    {day.items.map((item, idx) => (
-                      <li className="agenda-item" key={idx}>
-                        <span className="agenda-item-dot" aria-hidden="true" />
-                        <span className="agenda-item-text">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="accordion-body">
+                    <ul className="agenda-list list-unstyled m-0">
+                      {day.items.map((item, idx) => (
+                        <li className="agenda-item d-flex" key={idx}>
+                          <span className="agenda-item-dot" aria-hidden="true" />
+                          <span className="agenda-item-text">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
             );
