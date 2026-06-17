@@ -50,18 +50,22 @@
 }
 
 .hero-title {
-  font-weight: 700;
-  font-size: clamp(1.9rem, 3.4vw, 3rem);
-  line-height: 1.55;
-  color: #ffffff;
-  max-width: 720px;
+  font-weight: 600;                 /* وزن أنيق غير ثقيل */
+  font-size: clamp(2rem, 3.6vw, 3.1rem);
+  line-height: 1.7;                 /* تنفّس مريح بين الأسطر */
+  letter-spacing: 0;
+  color: #f4f7f7;                   /* أبيض ناعم بدل الأبيض الحادّ */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.22); /* عمق خفيف بدل صندوق خلفي */
+  max-width: 760px;
   margin: 0 auto 1.75rem;
 }
 
 .hero-subtitle {
-  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
   font-weight: 400;
-  color: #a5aeb0;
+  line-height: 1.85;
+  color: #cdd6d8;                   /* لون هادئ مريح للعين */
+  max-width: 620px;
   margin: 0 auto 2.5rem;
 }
 
@@ -84,7 +88,8 @@
    نضيف هنا فقط ما لا توفّره فئات Bootstrap بدقّة: العرض الأدنى والظل عند المرور */
 .hero-btn {
   --bs-btn-border-radius: 8px;
-  --bs-btn-font-weight: 500;
+  --bs-btn-font-weight: 600;
+  letter-spacing: 0.2px;
   min-width: 235px;
 }
 

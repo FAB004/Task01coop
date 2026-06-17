@@ -48,7 +48,7 @@ export default function Header() {
         #confNavbar { background-color:#21363b; border-radius:0 0 28px 28px; padding-block:.55rem; font-family:"Cairo",system-ui,"Segoe UI",sans-serif; }
         #confNavbar .navbar-brand img { height:64px; width:auto; object-fit:contain; }
         #confNavbar .navbar-nav { gap:1.4rem; }
-        #confNavbar .nav-link { color:#fff; font-weight:500; font-size:.98rem; white-space:nowrap; padding:.35rem .15rem; transition:color .2s ease; }
+        #confNavbar .nav-link { color:#fff; font-weight:500; font-size:.98rem; letter-spacing:.2px; white-space:nowrap; padding:.35rem .15rem; transition:color .2s ease; }
         #confNavbar .nav-link:hover, #confNavbar .nav-link:focus { color:#7ac17d; }
         #confNavbar .nav-link.active { color:#7ac17d; font-weight:700; }
         #confNavbar .dropdown-toggle::after { margin-right:.4em; margin-left:0; vertical-align:.15em; }

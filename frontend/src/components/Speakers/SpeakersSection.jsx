@@ -7,20 +7,19 @@ import "./SpeakersSection.css";
 const SPEAKERS = [
   { name: "", title: "خبير إدارة الموارد المائية", image: "" },
   { name: "", title: "استشارية تقنيات الري الحديثة", image: "" },
-  { name: "د. خالد المطيري", title: "أستاذ هندسة الري والصرف", image: "" },
-  { name: "م. نورة القحطاني", title: "مديرة مشاريع الاستدامة البيئية", image: "" },
-  { name: "د. فهد الشهري", title: "باحث في كفاءة استهلاك المياه", image: "" },
-  { name: "م. ريم الغامدي", title: "مهندسة نظم الصرف الزراعي", image: "" },
+  { name: "د. خالد ", title: "أستاذ هندسة الري والصرف", image: "" },
+  { name: "", title: "مديرة مشاريع الاستدامة البيئية", image: "" },
+  { name: "د.  ", title: "باحث في كفاءة استهلاك المياه", image: "" },
+  { name: ".  ", title: "مهندسة   ", image: "" },
 ];
 
-// الأحرف الأولى من الاسم تظهر داخل الصورة البديلة عند غياب الصورة
 const getInitials = (name) =>
   (name || "").replace(/^(د\.|م\.|أ\.)\s*/, "").trim().charAt(0) || "؟";
 
 export default function SpeakersSection({ speakers = SPEAKERS }) {
   const trackRef = useRef(null);
 
-  // تمرير المسار بمقدار ~80% من عرضه (يتكيّف مع الاتجاه RTL تلقائياً)
+  // تمرير شريط المتحدثين بمقدار ~80% من عرضه (يتكيّف مع الاتجاه RTL تلقائياً)
   const scrollByCards = (direction) => {
     const track = trackRef.current;
     if (!track) return;
@@ -35,7 +34,6 @@ export default function SpeakersSection({ speakers = SPEAKERS }) {
           <h2 className="speakers-title">المتحدثون</h2>
         </header>
 
-        {/* مسار أفقي قابل للتمرير (يمين ← يسار) بدون أي مكتبات */}
         <div className="speakers-track" role="list" ref={trackRef}>
           {speakers.map((speaker, index) => (
             <article className="speaker-card" role="listitem" key={index}>
@@ -63,7 +61,7 @@ export default function SpeakersSection({ speakers = SPEAKERS }) {
           ))}
         </div>
 
-        {/* أزرار التنقّل أسفل المتحدثين: يمين / يسار */}
+        {/* أزرار تحريك المتحدثين: يمين / يسار */}
         <div className="speakers-controls">
           <button
             type="button"

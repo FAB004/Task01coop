@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap");
 
-/* ===== قسم الأجندة ===== */
+/* ===== قسم الأجندة (تصميم فاتح وهادئ) ===== */
 .agenda-section {
   font-family: "Cairo", system-ui, "Segoe UI", sans-serif;
-  background-color: #21363b;
+  background-color: #f4faf7; /* نفس خلفية قسم "عن المؤتمر" */
   scroll-margin-top: 96px;
   padding-top: 80px;
   padding-bottom: 90px;
@@ -16,62 +16,64 @@
   height: 4px;
   margin: 0 auto 1.1rem;
   border-radius: 999px;
-  background-color: #7ac17d;
+  background-color: #2f8f46; /* أخضر هادئ */
 }
 
 .agenda-title {
   margin: 0;
-  color: #ffffff;
+  color: #12393c; /* تركواز داكن */
   font-weight: 700;
   font-size: clamp(1.9rem, 3.2vw, 2.8rem);
 }
 
-/* ===== سمة أكورديون Bootstrap (داكنة) ===== */
+/* ===== سمة أكورديون Bootstrap (فاتحة، بطاقات بيضاء) ===== */
 .agenda-accordion {
   max-width: 900px;
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
 
-  --bs-accordion-bg: transparent;
-  --bs-accordion-color: #ffffff;
-  --bs-accordion-border-color: rgba(255, 255, 255, 0.12);
+  --bs-accordion-bg: #ffffff;
+  --bs-accordion-color: #334155;
+  --bs-accordion-border-color: rgba(18, 57, 60, 0.08);
   --bs-accordion-border-radius: 16px;
   --bs-accordion-inner-border-radius: 16px;
-  --bs-accordion-btn-color: #ffffff;
+  --bs-accordion-btn-color: #12393c;
   --bs-accordion-btn-padding-x: 1.6rem;
   --bs-accordion-btn-padding-y: 1.25rem;
-  --bs-accordion-btn-bg: rgba(255, 255, 255, 0.05);
-  --bs-accordion-active-bg: rgba(255, 255, 255, 0.05);
-  --bs-accordion-active-color: #ffffff;
-  --bs-accordion-btn-focus-border-color: rgba(122, 193, 125, 0.45);
-  --bs-accordion-btn-focus-box-shadow: none;
-  /* سهم أبيض بدل الأزرق الافتراضي */
-  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%237ac17d'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  --bs-accordion-btn-bg: #ffffff;
+  --bs-accordion-active-bg: #f4faf7;
+  --bs-accordion-active-color: #12393c;
+  --bs-accordion-btn-focus-border-color: rgba(47, 143, 70, 0.35);
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 0.2rem rgba(47, 143, 70, 0.15);
+  /* سهم بلون التركواز الداكن، ويتحوّل لأخضر عند الفتح */
+  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2312393c'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%232f8f46'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
 }
 
+/* بطاقة بيضاء بظل ناعم بدل الإطار الداكن */
 .agenda-accordion .accordion-item {
-  background: rgba(255, 255, 255, 0.05);
+  background: #ffffff;
   border: 1px solid var(--bs-accordion-border-color);
   border-radius: 16px;
   overflow: hidden;
+  box-shadow: 0 6px 20px rgba(18, 57, 60, 0.06);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .agenda-accordion .accordion-item:has(.accordion-button:not(.collapsed)) {
-  border-color: rgba(122, 193, 125, 0.45);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+  border-color: rgba(47, 143, 70, 0.35);
+  box-shadow: 0 14px 34px rgba(18, 57, 60, 0.12);
 }
 
 .agenda-panel-label {
-  color: #ffffff;
+  color: #12393c; /* تركواز داكن */
   font-weight: 700;
   font-size: 1.2rem;
 }
 
 .agenda-panel-date {
-  color: #7ac17d;
+  color: #4e8d62; /* أخضر/تركواز هادئ للتواريخ والعناوين الصغيرة */
   font-weight: 500;
   font-size: 0.9rem;
 }
@@ -84,28 +86,29 @@
 .agenda-item {
   align-items: flex-start;
   gap: 0.85rem;
-  padding: 0.85rem 0.25rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.9rem 0.25rem;
+  border-top: 1px solid rgba(18, 57, 60, 0.08); /* فاصل ناعم */
 }
 
 .agenda-item:first-child {
   border-top: 0;
 }
 
+/* نقطة خضراء صغيرة كعلامة لطيفة */
 .agenda-item-dot {
   flex-shrink: 0;
   width: 9px;
   height: 9px;
-  margin-top: 0.55rem;
+  margin-top: 0.6rem;
   border-radius: 50%;
-  background-color: #7ac17d;
+  background-color: #2f8f46;
 }
 
 .agenda-item-text {
-  color: #e6edef;
+  color: #334155; /* رمادي داكن مريح */
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.8;
+  line-height: 1.95;
 }
 
 /* ===== الاستجابة ===== */

@@ -17,9 +17,9 @@ const NAV_LINKS = [
 ];
 
 const CONTACTS = [
-  { icon: FaEnvelope, text: "info@irrigation-conf.com" },
-  { icon: FaMapMarkerAlt, text: "فندق هيلتون غرناطة - الرياض - السعودية" },
-  { icon: FaPhone, text: "+966 11 234 5678" },
+  { icon: FaEnvelope, text: "FAB@irrigation.com" },
+  { icon: FaMapMarkerAlt, text: "فندق الانتركونتينتال - الاحساء - السعودية" },
+  { icon: FaPhone, text: "+966" },
 ];
 
 const SOCIALS = [

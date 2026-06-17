@@ -37,7 +37,7 @@ export default function AgendaSection() {
           <h2 className="agenda-title">الأجندة</h2>
         </header>
 
-        {/* أكورديون Bootstrap */}
+     
         <div className="accordion agenda-accordion mx-auto" id="agendaAccordion">
           {DAYS.map((day, index) => {
             const isFirst = index === 0;
