@@ -23,7 +23,7 @@ export default function AboutConferenceHero() {
         >
           <g
             fill="none"
-            stroke="#6fb6c2"
+            stroke="#9ed6c4"
             strokeWidth="1.4"
             strokeLinecap="round"
           >

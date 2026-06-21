@@ -1,24 +1,24 @@
-@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Cairo:wght@400;500;600;700&display=swap");
 
 /* =========================================================
    الأساس الطباعي للموقع
-   خط عربي نظيف (Cairo) عالمياً + تباعد وأوزان مريحة للعين،
-   مع إزالة التضييق السالب للحروف الذي كان يجعل العربية حادة.
+   خط نظام التصميم الرسمي "IBM Plex Sans Arabic" (مع Cairo كبديل)،
+   تباعد وأوزان مريحة للعين وخلفية فاتحة رسمية.
    ========================================================= */
 :root {
-  /* خطوط عربية نظيفة (Cairo)؛ بدائل آمنة بعدها */
-  --sans: "Cairo", "Segoe UI", Tahoma, system-ui, sans-serif;
-  --heading: "Cairo", "Segoe UI", Tahoma, system-ui, sans-serif;
+  /* خط نظام التصميم الرسمي؛ بدائل عربية آمنة بعده */
+  --sans: "IBM Plex Sans Arabic", "Tajawal", "Cairo", "Segoe UI", Tahoma, system-ui, sans-serif;
+  --heading: "IBM Plex Sans Arabic", "Tajawal", "Cairo", "Segoe UI", Tahoma, system-ui, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   /* ربط خط Bootstrap بالخط العربي حتى تتبعه كل المكوّنات */
   --bs-body-font-family: var(--sans);
 
   /* ألوان نصّية هادئة (بلا أسود حادّ أو ألوان صارخة) */
-  --text: #41525a;     /* نص أساسي هادئ */
-  --text-h: #1c2b30;   /* عناوين داكنة ناعمة */
+  --text: #384250;     /* نص أساسي هادئ (neutral-700) */
+  --text-h: #12393c;   /* عناوين تركواز داكنة */
   --bg: #ffffff;
-  --border: #e5e4e7;
+  --border: #e5e7eb;
 
   font-family: var(--sans);
   font-size: 18px;
@@ -55,9 +55,9 @@ body {
   margin: 0;
 }
 
-/* خلفية الصفحة العامة (تظهر خلف زوايا الهيدر المدوّرة) */
+/* خلفية الصفحة العامة: فاتحة ورسمية تتّسق مع الهيدر الأبيض */
 .app-page {
-  background-color: #4c5d62;
+  background-color: #ffffff;
   min-height: 100svh;
 }
 

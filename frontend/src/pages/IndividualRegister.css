@@ -1,14 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap");
-
-/* ===== الهيرو ===== */
+/* ===== الهيرو (فاتح رسمي) ===== */
 .individual-hero {
   position: relative;
-  font-family: "Cairo", system-ui, "Segoe UI", sans-serif;
-  background-color: #4c5d62;
-  color: #ffffff;
+  font-family: var(--dga-font);
+  background:
+    radial-gradient(120% 90% at 85% 0%, var(--dga-primary-soft) 0%, rgba(243, 252, 246, 0) 55%),
+    linear-gradient(180deg, #ffffff 0%, var(--dga-bg-mint) 100%);
+  color: var(--dga-text);
   overflow: hidden;
   padding-top: 80px;
-  padding-bottom: 80px;
+  padding-bottom: 140px;
   display: flex;
   align-items: center;
 }
@@ -21,7 +21,7 @@
   width: 48%;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.5;
+  opacity: 0.45;
   -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 100%);
   mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 100%);
 }
@@ -43,7 +43,7 @@
   font-weight: 700;
   font-size: clamp(1.9rem, 3.4vw, 3rem);
   line-height: 1.5;
-  color: #ffffff;
+  color: var(--dga-heading);
   margin: 0 0 1rem;
 }
 
@@ -51,14 +51,14 @@
   font-size: clamp(0.98rem, 1.4vw, 1.15rem);
   font-weight: 400;
   line-height: 2;
-  color: #e6edef;
+  color: var(--dga-muted);
   margin: 0 auto;
 }
 
 /* ===== قسم النموذج ===== */
 .individual-form-section {
-  font-family: "Cairo", system-ui, "Segoe UI", sans-serif;
-  background-color: #f3f6f6;
+  font-family: var(--dga-font);
+  background-color: var(--dga-bg-soft);
   padding-top: 64px;
   padding-bottom: 90px;
 }
@@ -66,9 +66,10 @@
 .individual-card {
   max-width: 720px;
   margin: 0 auto;
-  background-color: #ffffff;
-  border-radius: 22px;
-  box-shadow: 0 18px 50px rgba(33, 54, 59, 0.14);
+  background-color: var(--dga-surface);
+  border: 1px solid var(--dga-border);
+  border-radius: var(--dga-radius);
+  box-shadow: var(--dga-shadow-md);
   padding: clamp(1.6rem, 4vw, 3rem);
   margin-top: -120px;
   position: relative;
@@ -78,35 +79,40 @@
 .individual-card-title {
   font-weight: 700;
   font-size: clamp(1.4rem, 2.4vw, 1.9rem);
-  color: #21363b;
+  color: var(--dga-heading);
   text-align: center;
   margin: 0 0 0.5rem;
 }
 
 .individual-card-desc {
   text-align: center;
-  color: #6b7b7f;
+  color: var(--dga-muted);
   font-size: 0.98rem;
   line-height: 1.8;
   margin: 0 0 1.8rem;
 }
 
-/* ===== إعادة تنسيق حقول Bootstrap لتطابق التصميم الأصلي ===== */
+/* ===== حقول Bootstrap بالهوية الرسمية ===== */
 .individual-card .form-label {
   font-weight: 600;
   font-size: 0.95rem;
-  color: #21363b;
+  color: var(--dga-heading);
   margin-bottom: 0.45rem;
 }
 
 .individual-card .form-control,
 .individual-card .form-select {
   font-size: 1rem;
-  color: #21363b;
-  background-color: #f9fbfb;
-  border: 1.6px solid #dce5e6;
-  border-radius: 12px;
+  color: var(--dga-heading);
+  background-color: var(--dga-bg-soft);
+  border: 1.5px solid var(--dga-border-strong);
+  border-radius: var(--dga-radius-sm);
   padding: 0.8rem 1rem;
+}
+
+.individual-card .form-control:focus,
+.individual-card .form-select:focus {
+  background-color: #ffffff;
 }
 
 .individual-card textarea.form-control {
@@ -114,20 +120,32 @@
 }
 
 .individual-card .form-control::placeholder {
-  color: #9bacad;
+  color: var(--dga-muted);
 }
 
 .individual-card .individual-submit {
   font-weight: 700;
-  border-radius: 12px;
+  border-radius: var(--dga-radius-sm);
   padding: 0.95rem 1.5rem;
+}
+
+/* الخصائص الموروثة (direction) تعبر حدّ Shadow DOM إلى حقل المكتبة الداخلي */
+.ltr-field {
+  direction: ltr;
+  text-align: left;
+}
+
+/* زر الإرسال من المكتبة يملأ عرض العمود */
+.individual-submit-btn {
+  display: block;
+  width: 100%;
 }
 
 /* ===== الاستجابة ===== */
 @media (max-width: 767.98px) {
   .individual-hero {
     padding-top: 55px;
-    padding-bottom: 95px;
+    padding-bottom: 120px;
   }
 
   .individual-hero-pattern {

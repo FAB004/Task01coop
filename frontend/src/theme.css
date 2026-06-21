@@ -1,75 +1,136 @@
-@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap");
-
 /* =========================================================
-   طبقة سمة Bootstrap للمؤتمر
-   تُعيد توجيه متغيّرات Bootstrap CSS إلى ألوان وخطوط المؤتمر،
-   حتى تظهر مكوّنات Bootstrap (الأزرار، النماذج، الأكورديون،
-   الكاروسيل...) بنفس هوية الموقع.
+   طبقة سمة نظام تصميم منصّات الحكومة الرقمية (Platforms Code / DGA)
+   مصدر واحد للهوية الرسمية: ألوان هادئة (أخضر علم السعودية + تركواز داكن)،
+   خط "IBM Plex Sans Arabic"، حواف مدوّرة، وظلال خفيفة.
+   تُعيد توجيه متغيّرات Bootstrap (أزرار، نماذج، أكورديون، تنبيهات)
+   إلى الهوية الرسمية حتى تتّسق كل المكوّنات عبر الصفحات.
    ========================================================= */
 :root {
-  /* لوحة ألوان المؤتمر */
-  --conf-teal: #21363b;
+  /* ===== رموز الهوية الرسمية (DGA) ===== */
+  --dga-primary: #1b8354;          /* أخضر علم السعودية (أساسي) */
+  --dga-primary-strong: #166a45;   /* أخضر أغمق للحالات النشطة */
+  --dga-primary-soft: #f3fcf6;     /* خلفية خضراء فاتحة جداً */
+  --dga-primary-100: #dff6e7;      /* حدود/خلفية خضراء ناعمة */
+  --dga-heading: #12393c;          /* تركواز داكن للعناوين */
+  --dga-text: #384250;             /* نص أساسي رمادي هادئ */
+  --dga-muted: #6c727e;            /* نص ثانوي */
+  --dga-border: #e5e7eb;           /* حدود ناعمة */
+  --dga-border-strong: #d2d6db;
+  --dga-surface: #ffffff;          /* أسطح البطاقات */
+  --dga-bg-soft: #f9fafb;          /* خلفية أقسام فاتحة */
+  --dga-bg-mint: #f4faf7;          /* خلفية أقسام بلمسة خضراء */
+  --dga-footer: #104631;           /* أخضر داكن رسمي للفوتر */
+
+  --dga-radius: 14px;              /* نصف قطر موحّد للبطاقات */
+  --dga-radius-sm: 10px;
+  --dga-shadow: 0 6px 22px rgba(16, 25, 40, 0.06);   /* ظل خفيف */
+  --dga-shadow-md: 0 12px 30px rgba(16, 25, 40, 0.10);
+
+  --dga-font: "IBM Plex Sans Arabic", "Tajawal", "Cairo", system-ui, "Segoe UI", sans-serif;
+
+  /* ===== توافق مع المتغيّرات القديمة (لئلا يكسر CSS الموجود) ===== */
+  --conf-teal: var(--dga-heading);
   --conf-teal-2: #4c5d62;
-  --conf-teal-dark: #1a2c30;
-  --conf-green: #7ac17d;
-  --conf-green-strong: #2f8f46;
-  --conf-cyan: #0dcaf0;
+  --conf-teal-dark: var(--dga-footer);
+  --conf-green: var(--dga-primary);
+  --conf-green-strong: var(--dga-primary-strong);
+  --conf-cyan: var(--dga-primary);
 
-  /* الخط الافتراضي للموقع */
-  --bs-body-font-family: "Cairo", system-ui, "Segoe UI", sans-serif;
-
-  /* ربط ألوان Bootstrap الأساسية بلوحة المؤتمر */
-  --bs-primary: #21363b;
-  --bs-primary-rgb: 33, 54, 59;
-  --bs-success: #2f8f46;
-  --bs-success-rgb: 47, 143, 70;
-  --bs-info: #0dcaf0;
-  --bs-info-rgb: 13, 202, 240;
+  /* ===== ربط Bootstrap بالهوية الرسمية ===== */
+  --bs-body-font-family: var(--dga-font);
+  --bs-primary: #1b8354;
+  --bs-primary-rgb: 27, 131, 84;
+  --bs-success: #1b8354;
+  --bs-success-rgb: 27, 131, 84;
+  --bs-info: #1b8354;
+  --bs-info-rgb: 27, 131, 84;
 }
 
-/* ===== الأزرار الأساسية (teal) ===== */
+/* ===== الأزرار الأساسية (أخضر رسمي) ===== */
 .btn-primary {
-  --bs-btn-bg: var(--conf-teal);
-  --bs-btn-border-color: var(--conf-teal);
-  --bs-btn-hover-bg: var(--conf-green);
-  --bs-btn-hover-border-color: var(--conf-green);
-  --bs-btn-hover-color: var(--conf-teal);
-  --bs-btn-active-bg: var(--conf-green);
-  --bs-btn-active-border-color: var(--conf-green);
-  --bs-btn-active-color: var(--conf-teal);
-  --bs-btn-focus-shadow-rgb: 122, 193, 125;
-}
-
-/* زر الهيرو ذو الإطار السماوي */
-.btn-outline-info {
-  --bs-btn-color: #e9eff0;
-  --bs-btn-border-color: var(--conf-cyan);
-  --bs-btn-hover-bg: var(--conf-cyan);
-  --bs-btn-hover-border-color: var(--conf-cyan);
-  --bs-btn-hover-color: #16343a;
-  --bs-btn-active-bg: var(--conf-cyan);
-  --bs-btn-active-color: #16343a;
-}
-
-/* زر التنقّل الأخضر (أسهم الكاروسيل ونحوها) */
-.btn-outline-success {
-  --bs-btn-color: var(--conf-green-strong);
-  --bs-btn-border-color: var(--conf-green-strong);
-  --bs-btn-hover-bg: var(--conf-green-strong);
-  --bs-btn-hover-border-color: var(--conf-green-strong);
+  --bs-btn-bg: var(--dga-primary);
+  --bs-btn-border-color: var(--dga-primary);
+  --bs-btn-hover-bg: var(--dga-primary-strong);
+  --bs-btn-hover-border-color: var(--dga-primary-strong);
   --bs-btn-hover-color: #ffffff;
+  --bs-btn-active-bg: var(--dga-primary-strong);
+  --bs-btn-active-border-color: var(--dga-primary-strong);
+  --bs-btn-active-color: #ffffff;
+  --bs-btn-focus-shadow-rgb: 27, 131, 84;
 }
 
-/* ===== حقول النماذج: تركيز بلون المؤتمر الأخضر ===== */
+.btn-outline-info,
+.btn-outline-success {
+  --bs-btn-color: var(--dga-primary);
+  --bs-btn-border-color: var(--dga-primary);
+  --bs-btn-hover-bg: var(--dga-primary);
+  --bs-btn-hover-border-color: var(--dga-primary);
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-active-bg: var(--dga-primary);
+  --bs-btn-active-border-color: var(--dga-primary);
+  --bs-btn-active-color: #ffffff;
+  --bs-btn-focus-shadow-rgb: 27, 131, 84;
+}
+
+/* ===== أزرار رسمية عامة قابلة لإعادة الاستخدام عبر كل الصفحات ===== */
+.dga-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--dga-font);
+  font-weight: 600;
+  font-size: 0.98rem;
+  line-height: 1;
+  white-space: nowrap;
+  padding: 0.78rem 1.5rem;
+  border-radius: var(--dga-radius-sm);
+  border: 1.5px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+.dga-btn:focus-visible { outline: 2px solid var(--dga-primary); outline-offset: 2px; }
+.dga-btn-primary { background: var(--dga-primary); color: #fff; }
+.dga-btn-primary:hover { background: var(--dga-primary-strong); color: #fff; }
+.dga-btn-outline { background: transparent; color: var(--dga-primary); border-color: var(--dga-primary); }
+.dga-btn-outline:hover { background: var(--dga-primary-soft); color: var(--dga-primary-strong); }
+.dga-btn-ghost { background: transparent; color: var(--dga-heading); border-color: var(--dga-border-strong); }
+.dga-btn-ghost:hover { color: var(--dga-primary); border-color: var(--dga-primary); background: var(--dga-primary-soft); }
+
+/* ===== ترويسة قسم رسمية موحّدة (عنوان + شارة خضراء) ===== */
+.dga-section-head { text-align: center; margin-bottom: 2.75rem; }
+.dga-section-title {
+  margin: 0;
+  color: var(--dga-heading);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+}
+.dga-section-accent {
+  display: block;
+  width: 72px;
+  height: 4px;
+  margin: 1rem auto 0;
+  border-radius: 999px;
+  background: var(--dga-primary);
+}
+
+/* ===== حقول النماذج: مظهر رسمي وتركيز أخضر هادئ ===== */
+.form-control,
+.form-select {
+  border-radius: var(--dga-radius-sm);
+  border-color: var(--dga-border-strong);
+}
 .form-control:focus,
 .form-select:focus {
-  border-color: var(--conf-green);
-  box-shadow: 0 0 0 0.25rem rgba(122, 193, 125, 0.25);
+  border-color: var(--dga-primary);
+  box-shadow: 0 0 0 0.2rem rgba(27, 131, 84, 0.18);
 }
 
-/* ===== تنبيه النجاح بلون المؤتمر ===== */
+/* ===== تنبيه النجاح بالهوية الرسمية ===== */
 .alert-conf-success {
-  --bs-alert-color: #2f5e32;
-  --bs-alert-bg: rgba(122, 193, 125, 0.15);
-  --bs-alert-border-color: var(--conf-green);
+  --bs-alert-color: var(--dga-primary-strong);
+  --bs-alert-bg: var(--dga-primary-soft);
+  --bs-alert-border-color: var(--dga-primary-100);
+  border-radius: var(--dga-radius-sm);
 }

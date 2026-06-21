@@ -1,40 +1,106 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
-import logo from "../../assets/Logo01.png";
+import { Link, NavLink as RouterNavLink, useLocation } from "react-router-dom";
+import { DgaButtonV2 } from "platformscode-new-react";
+import logo from "../../assets/Main_Logo.png";
 
+const NAV_ITEMS = [
+  { label: "الرئيسية", to: "/" },
+  {
+    label: "المؤتمر",
+    children: [
+      { label: "عن المؤتمر", to: "/about" },
+      { label: "أهداف المؤتمر", href: "#" },
+      { label: "محاور المؤتمر", href: "#" },
+    ],
+  },
+  {
+    label: "المركز الإعلامي",
+    children: [
+      { label: "الصور", href: "#" },
+      { label: "الفيديوهات", href: "#" },
+      { label: "الأخبار", href: "#" },
+    ],
+  },
+  { label: "الزيارة الميدانية", href: "#" },
+  { label: "المعرض", href: "#" },
+  { label: "الأجندة", href: "#agenda" },
+  { label: "المتحدثون", href: "#speakers" },
+];
 
+// أزرار التسجيل كمكوّنات DgaButtonV2 رسمية، تظهر مباشرةً داخل شريط التنقّل (آخر عنصرين).
+const REGISTER_ACTIONS = [
+  { label: "تسجيل الأفراد", to: "/individual-register", variant: "primary" },
+  { label: "تسجيل الرعاة", to: "/sponsor-register", variant: "secondary-outline" },
+];
 
-function NavDropdown({ label, children }) {
+// رابط مفرد: داخلي عبر RouterNavLink (تفعيل تلقائي حسب المسار) أو <a> للهاش.
+function NavItemLink({ item, className, activeClassName = "is-active", onSelect }) {
+  if (item.to) {
+    return (
+      <RouterNavLink
+        to={item.to}
+        end={item.to === "/"}
+        onClick={onSelect}
+        className={({ isActive }) =>
+          isActive ? `${className} ${activeClassName}` : className
+        }
+      >
+        {item.label}
+      </RouterNavLink>
+    );
+  }
+  return (
+    <a className={className} href={item.href} onClick={onSelect}>
+      {item.label}
+    </a>
+  );
+}
+
+function NavDropdown({ item }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
+  const location = useLocation();
 
- 
+  const childActive = item.children.some(
+    (c) => c.to && (c.to === "/" ? location.pathname === "/" : location.pathname.startsWith(c.to))
+  );
+
   useEffect(() => {
+    if (!open) return;
     const onDoc = (e) => {
       if (ref.current && !ref.current.contains(e.target)) setOpen(false);
     };
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
     document.addEventListener("click", onDoc);
-    return () => document.removeEventListener("click", onDoc);
-  }, []);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("click", onDoc);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
 
   return (
-   
     <li className="nav-item dropdown" ref={ref}>
-      <a
-        className="nav-link dropdown-toggle" 
-        href="#"
-        role="button"
+      <button
+        type="button"
+        className={`dga-nav-link dga-dropdown-toggle ${childActive ? "is-active" : ""}`}
+        aria-haspopup="true"
         aria-expanded={open}
-        onClick={(e) => {
-          e.preventDefault();
-          setOpen((o) => !o);
-        }}
+        onClick={() => setOpen((o) => !o)}
       >
-        {label}
-      </a>
-      {/* dropdown-menu + show: قائمة Bootstrap المنسدلة، تُظهر/تُخفى عبر حالة React */}
-      <ul className={`dropdown-menu ${open ? "show" : ""}`} dir="rtl">
-        {children}
+        {item.label}
+        <span className="dga-caret" aria-hidden="true" />
+      </button>
+      <ul className={`dga-dropdown-menu ${open ? "show" : ""}`} dir="rtl">
+        {item.children.map((child) => (
+          <li key={child.label}>
+            <NavItemLink
+              item={child}
+              className="dga-dropdown-item"
+              onSelect={() => setOpen(false)}
+            />
+          </li>
+        ))}
       </ul>
     </li>
   );
@@ -42,87 +108,137 @@ function NavDropdown({ label, children }) {
 
 export default function Header() {
   return (
-    <header dir="rtl">
-      
+    <header className="dga-header" dir="rtl">
       <style>{`
-        #confNavbar { background-color:#21363b; border-radius:0 0 28px 28px; padding-block:.55rem; font-family:"Cairo",system-ui,"Segoe UI",sans-serif; }
-        #confNavbar .navbar-brand img { height:64px; width:auto; object-fit:contain; }
-        #confNavbar .navbar-nav { gap:1.4rem; }
-        #confNavbar .nav-link { color:#fff; font-weight:500; font-size:.98rem; letter-spacing:.2px; white-space:nowrap; padding:.35rem .15rem; transition:color .2s ease; }
-        #confNavbar .nav-link:hover, #confNavbar .nav-link:focus { color:#7ac17d; }
-        #confNavbar .nav-link.active { color:#7ac17d; font-weight:700; }
-        #confNavbar .dropdown-toggle::after { margin-right:.4em; margin-left:0; vertical-align:.15em; }
-        #confNavbar .dropdown-menu { background-color:#21363b; border:1px solid rgba(255,255,255,.08); border-radius:10px; text-align:right; padding:.4rem 0; box-shadow:0 10px 28px rgba(0,0,0,.35); }
-        @media (min-width:992px){ #confNavbar .dropdown-menu.show { position:absolute; top:100%; right:0; left:auto; margin-top:.25rem; z-index:1031; } }
-        @media (max-width:991.98px){ #confNavbar .dropdown-menu.show { position:static; margin-top:.25rem; } }
-        #confNavbar .dropdown-item { color:#e6edef; font-size:.92rem; padding:.5rem 1.1rem; }
-        #confNavbar .dropdown-item:hover, #confNavbar .dropdown-item:focus { background-color:#2d4750; color:#7ac17d; }
-        #confNavbar .btn-en { border:1.6px solid #7ac17d; color:#7ac17d; background:transparent; border-radius:8px; padding:.5rem 1rem; font-weight:700; font-size:.95rem; line-height:1; letter-spacing:.5px; transition:all .2s ease; }
-        #confNavbar .btn-en:hover, #confNavbar .btn-en:focus { background-color:#7ac17d; color:#21363b; }
-        #confNavbar .navbar-toggler { border-color:rgba(255,255,255,.35); padding:.3rem .55rem; }
-        #confNavbar .navbar-toggler:focus { box-shadow:none; }
-        #confNavbar .navbar-toggler-icon { filter:invert(1) brightness(2); }
-        @media (max-width:991.98px){
-          #confNavbar { border-radius:0 0 20px 20px; }
-          #confNavbar .navbar-nav { gap:.4rem; margin-top:.75rem; margin-inline:0 !important; }
-          #confNavbar .lang-switch { margin-top:.75rem; justify-content:flex-start; }
-          #confNavbar .navbar-brand img { height:52px; }
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
+
+        .dga-header {
+          --dga-primary: var(--colors-primary-sa-flag-600-primary, #1b8354);
+          --dga-primary-strong: var(--colors-primary-sa-flag-700, #166a45);
+          --dga-primary-soft: var(--colors-primary-sa-flag-50, #f3fcf6);
+          --dga-text: var(--colors-neutral-700, #384250);
+          --dga-text-strong: var(--colors-neutral-900, #111927);
+          --dga-border: var(--colors-neutral-200, #e5e7eb);
+          --dga-border-strong: var(--colors-neutral-300, #d2d6db);
+          --dga-surface: var(--colors-base-white, #ffffff);
+          --dga-surface-muted: var(--colors-neutral-50, #f9fafb);
+          font-family: "IBM Plex Sans Arabic", "Tajawal", "Cairo", system-ui, "Segoe UI", sans-serif;
+        }
+        .dga-header #dgaNavbar {
+          background: var(--dga-surface);
+          border-bottom: 1px solid var(--dga-border);
+          box-shadow: 0 1px 2px rgba(16,25,40,.04);
+          padding-block: .5rem;
+        }
+        .dga-header .dga-bar {
+          display: flex; align-items: center; flex-wrap: wrap;
+          gap: .5rem 1rem; width: 100%;
+        }
+        .dga-header .navbar-brand { flex: 0 0 auto; }
+        .dga-header .navbar-brand img { height: 50px; width: auto; object-fit: contain; }
+
+        /* قائمة التنقّل: صف أفقي يلتفّ بدل الاختفاء، تظهر كل العناصر دائماً */
+        .dga-header .dga-nav {
+          flex: 1 1 auto;
+          display: flex; flex-direction: row; flex-wrap: wrap;
+          align-items: center; justify-content: center;
+          gap: .15rem .1rem; list-style: none; margin: 0; padding: 0;
+        }
+        .dga-header .dga-nav-link {
+          display: inline-flex; align-items: center; gap: .35rem;
+          color: var(--dga-text); font-weight: 500; font-size: .92rem;
+          line-height: 1; white-space: nowrap; text-decoration: none;
+          background: transparent; border: 0;
+          padding: .55rem .6rem; border-radius: 8px;
+          transition: color .18s ease, background-color .18s ease;
+        }
+        .dga-header .dga-nav-link:hover,
+        .dga-header .dga-nav-link:focus-visible {
+          color: var(--dga-primary); background: var(--dga-primary-soft);
+        }
+        .dga-header .dga-nav-link.is-active { color: var(--dga-primary); font-weight: 700; }
+        .dga-header .dga-nav-link:focus-visible { outline: 2px solid var(--dga-primary); outline-offset: 2px; }
+
+        /* سهم القائمة */
+        .dga-header .dga-dropdown-toggle { cursor: pointer; }
+        .dga-header .dga-caret {
+          width: .5rem; height: .5rem; border-inline-start: 1.6px solid currentColor;
+          border-bottom: 1.6px solid currentColor; transform: rotate(-45deg);
+          transition: transform .18s ease; margin-top: -2px;
+        }
+        .dga-header .dga-dropdown-toggle[aria-expanded="true"] .dga-caret { transform: rotate(135deg); margin-top: 2px; }
+
+        /* القائمة المنسدلة */
+        .dga-header .nav-item.dropdown { position: relative; }
+        .dga-header .dga-dropdown-menu {
+          position: absolute; top: calc(100% + .4rem); inset-inline-end: 0;
+          min-width: 12.5rem; max-width: calc(100vw - 2rem);
+          list-style: none; margin: 0; padding: .4rem;
+          background: var(--dga-surface); border: 1px solid var(--dga-border);
+          border-radius: 12px; box-shadow: 0 12px 28px rgba(16,25,40,.12);
+          opacity: 0; visibility: hidden; transform: translateY(-4px);
+          transition: opacity .15s ease, transform .15s ease, visibility .15s; z-index: 1031;
+        }
+        .dga-header .dga-dropdown-menu.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dga-header .dga-dropdown-item {
+          display: block; padding: .6rem .8rem; border-radius: 8px;
+          color: var(--dga-text); font-size: .92rem; text-decoration: none;
+          transition: background-color .15s ease, color .15s ease;
+        }
+        .dga-header .dga-dropdown-item:hover,
+        .dga-header .dga-dropdown-item:focus-visible,
+        .dga-header .dga-dropdown-item.is-active {
+          background: var(--dga-primary-soft); color: var(--dga-primary);
+        }
+
+        /* روابط التسجيل (CTA) كعناصر ظاهرة داخل الشريط */
+        .dga-header .dga-cta { text-decoration: none; display: inline-flex; }
+
+        /* منطقة الإجراءات: زر اللغة */
+        .dga-header .dga-actions { flex: 0 0 auto; display: flex; align-items: center; gap: .5rem; }
+
+        /* الشاشات المتوسطة/الصغيرة: تصغير لطيف ليبقى كل شيء ظاهراً دون زر مخفي */
+        @media (max-width: 1199.98px) {
+          .dga-header .dga-nav-link { font-size: .88rem; padding: .5rem .5rem; }
+          .dga-header .navbar-brand img { height: 44px; }
+        }
+        @media (max-width: 991.98px) {
+          .dga-header .dga-bar { justify-content: center; }
+          .dga-header .dga-nav { width: 100%; }
         }
       `}</style>
 
-      
-      <nav id="confNavbar" className="navbar navbar-expand-lg">
-      
-        <div className="container-fluid d-flex align-items-center gap-3 px-4 px-xl-5">
-        
-          <Link className="navbar-brand p-0 m-0" to="/">
-            <img src={logo} alt="شعار المؤتمر" />
-          </Link>
+      <nav id="dgaNavbar" className="navbar navbar-expand py-0">
+        <div className="container-fluid px-2 px-md-3 px-xl-4">
+          <div className="dga-bar">
+            <Link className="navbar-brand p-0 m-0" to="/">
+              <img src={logo} alt="شعار المؤتمر" />
+            </Link>
 
-         
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#mainNav"
-            aria-controls="mainNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
+            {/* كل عناصر التنقّل ظاهرة مباشرةً في الشريط (بلا زر هامبرغر) */}
+            <ul className="dga-nav">
+              {NAV_ITEMS.map((item) =>
+                item.children ? (
+                  <NavDropdown key={item.label} item={item} />
+                ) : (
+                  <li className="nav-item" key={item.label}>
+                    <NavItemLink item={item} className="dga-nav-link" />
+                  </li>
+                )
+              )}
 
-          
-          <div className="collapse navbar-collapse" id="mainNav">
-            {/* navbar-nav mx-auto: قائمة الروابط، mx-auto لتوسيطها أفقياً */}
-            <ul className="navbar-nav mx-auto">
-              <li className="nav-item">
-                <Link className="nav-link active" to="/">الرئيسية</Link>
-              </li>
-
-              <NavDropdown label="المؤتمر">
-                <li><Link className="dropdown-item" to="/about">عن المؤتمر</Link></li>
-                <li><a className="dropdown-item" href="#">أهداف المؤتمر</a></li>
-                <li><a className="dropdown-item" href="#">محاور المؤتمر</a></li>
-              </NavDropdown>
-
-              <NavDropdown label="المركز الاعلامي">
-                <li><a className="dropdown-item" href="#">الصور</a></li>
-                <li><a className="dropdown-item" href="#">الفيديوهات</a></li>
-                <li><a className="dropdown-item" href="#">الأخبار</a></li>
-              </NavDropdown>
-
-              <li className="nav-item"><a className="nav-link" href="#">الزيارة الميدانية</a></li>
-              <li className="nav-item"><Link className="nav-link" to="/individual-register">تسجيل الأفراد</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/sponsor-register">تسجيل الرعاة</Link></li>
-              <li className="nav-item"><a className="nav-link" href="#">المعرض</a></li>
-              <li className="nav-item"><a className="nav-link" href="#agenda">الأجندة</a></li>
-              <li className="nav-item"><a className="nav-link" href="#speakers">المتحدثون</a></li>
+              {/* تسجيل الأفراد وتسجيل الرعاة: ظاهران في الشريط كآخر عنصرين */}
+              {REGISTER_ACTIONS.map((a) => (
+                <li className="nav-item" key={a.to}>
+                  <Link to={a.to} className="dga-cta">
+                    <DgaButtonV2 variant={a.variant} size="sm" label={a.label} />
+                  </Link>
+                </li>
+              ))}
             </ul>
 
-          
-            <div className="lang-switch d-flex align-items-center">
-              <button type="button" className="btn btn-en">EN</button>
+            <div className="dga-actions">
+              <DgaButtonV2 variant="secondary-outline" size="sm" label="EN" />
             </div>
           </div>
         </div>

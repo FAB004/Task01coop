@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import heroBg from "../../assets/irrr.jpg";
 import "./HomeHero.css";
 
 
@@ -16,8 +17,12 @@ const PATTERN_LINES = Array.from({ length: 36 }, (_, i) => {
 
 export default function HomeHero() {
   return (
-    <section className="home-hero" dir="rtl">
-      
+    <section
+      className="home-hero"
+      dir="rtl"
+      style={{ "--hero-bg": `url(${heroBg})` }}
+    >
+
       <div className="hero-pattern" aria-hidden="true">
         <svg
           viewBox="0 0 470 800"
@@ -26,7 +31,7 @@ export default function HomeHero() {
         >
           <g
             fill="none"
-            stroke="#6fb6c2"
+            stroke="#9ed6c4"
             strokeWidth="1.4"
             strokeLinecap="round"
           >
@@ -46,16 +51,16 @@ export default function HomeHero() {
           الإداره المتكاملة لقطاع الري لتنمية مرنة ومستدامة
         </p>
 
-        <div className="hero-actions d-flex flex-column align-items-center gap-3">
-          <div className="hero-actions-row d-flex flex-wrap justify-content-center gap-3">
-            <Link to="/individual-register" className="btn btn-outline-info btn-lg hero-btn">
+        <div className="hero-actions">
+          <div className="hero-actions-row">
+            <Link to="/individual-register" className="dga-btn dga-btn-primary hero-btn">
               تسجيل الأفراد
             </Link>
-            <Link to="/sponsor-register" className="btn btn-outline-info btn-lg hero-btn">
+            <Link to="/sponsor-register" className="dga-btn dga-btn-outline hero-btn">
               تسجيل الرعاة
             </Link>
           </div>
-          <a href="#speakers" className="btn btn-outline-info btn-lg hero-btn">
+          <a href="#speakers" className="dga-btn dga-btn-ghost hero-btn">
             عرض البث المرئي
           </a>
         </div>

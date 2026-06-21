@@ -1,15 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap");
-
-/* ===== قسم المتحدثون ===== */
 .speakers-section {
-  font-family: "Cairo", system-ui, "Segoe UI", sans-serif;
-  background-color: #f4faf7; /* نفس خلفية قسم "عن المؤتمر" */
-  scroll-margin-top: 96px; /* تعويض ارتفاع الهيدر عند التمرير */
+  font-family: var(--dga-font);
+  background-color: var(--dga-bg-mint);
+  scroll-margin-top: 96px;
   padding-top: 80px;
   padding-bottom: 90px;
+  border-bottom: 1px solid var(--dga-border);
 }
 
-/* ===== العنوان ===== */
 .speakers-head {
   display: flex;
   flex-direction: column;
@@ -19,21 +16,20 @@
 }
 
 .speakers-accent {
-  width: 4px;
-  height: 38px;
+  width: 72px;
+  height: 4px;
   margin-bottom: 1rem;
   border-radius: 999px;
-  background-color: #2f8f46;
+  background-color: var(--dga-primary);
 }
 
 .speakers-title {
   margin: 0;
-  color: #1c3b25;
+  color: var(--dga-heading);
   font-weight: 700;
   font-size: clamp(1.9rem, 3.2vw, 2.8rem);
 }
 
-/* ===== مسار البطاقات (كاروسيل أفقي بدون مكتبات) ===== */
 .speakers-track {
   display: flex;
   flex-wrap: nowrap;
@@ -42,34 +38,31 @@
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 1rem; /* مساحة أسفل البطاقات بعيداً عن شريط التمرير */
-
-  /* إخفاء شريط التمرير - Firefox */
+  padding-bottom: 1rem;
   scrollbar-width: none;
-  /* إخفاء شريط التمرير - IE/Edge القديم */
   -ms-overflow-style: none;
 }
 
-/* إخفاء شريط التمرير - Chrome / Safari / Edge */
 .speakers-track::-webkit-scrollbar {
   display: none;
 }
 
-/* ===== بطاقة المتحدث ===== */
 .speaker-card {
-  flex: 0 0 280px; /* عرض ثابت؛ لا تتقلص ولا تلتف لسطر جديد */
+  flex: 0 0 280px;
   max-width: 280px;
   scroll-snap-align: start;
-  background-color: #ffffff;
-  border-radius: 18px;
+  background-color: var(--dga-surface);
+  border: 1px solid var(--dga-border);
+  border-radius: var(--dga-radius);
   overflow: hidden;
-  box-shadow: 0 14px 32px rgba(28, 59, 37, 0.12);
-  transition: transform 0.28s ease, box-shadow 0.28s ease;
+  box-shadow: var(--dga-shadow);
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
 }
 
 .speaker-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 22px 44px rgba(28, 59, 37, 0.22);
+  border-color: var(--dga-primary-100);
+  box-shadow: var(--dga-shadow-md);
 }
 
 .speaker-image-wrap {
@@ -78,6 +71,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--dga-bg-soft);
 }
 
 .speaker-image {
@@ -94,7 +88,7 @@
   transform: scale(1.05);
 }
 
-/* صورة بديلة فارغة (قبل إضافة الصور) */
+/* نائب الصورة الفارغ (يبقى ليُستبدل بالصور لاحقاً) */
 .speaker-image-placeholder {
   width: 100%;
   height: 100%;
@@ -103,25 +97,25 @@
   justify-content: center;
   font-weight: 700;
   font-size: clamp(2.4rem, 6vw, 3.4rem);
-  color: #7ac17d;
-  background: linear-gradient(135deg, #2d4750 0%, #21363b 100%);
+  color: var(--dga-primary);
+  background: linear-gradient(135deg, var(--dga-primary-soft) 0%, var(--dga-primary-100) 100%);
   user-select: none;
 }
 
-/* ===== الشريط السفلي الملوّن ===== */
 .speaker-info {
-  background-color: #21363b;
-  color: #ffffff;
+  background-color: var(--dga-surface);
+  color: var(--dga-heading);
   padding: 1.1rem 1.25rem;
   text-align: center;
-  border-top: 4px solid #7ac17d;
+  border-top: 3px solid var(--dga-primary);
 }
 
 .speaker-name {
   margin: 0 0 0.35rem;
   font-weight: 700;
   font-size: 1.1rem;
-  min-height: 1.3rem; /* يحافظ على الارتفاع حتى لو كان الاسم فارغاً */
+  min-height: 1.3rem;
+  color: var(--dga-heading);
 }
 
 .speaker-role {
@@ -129,10 +123,9 @@
   font-weight: 400;
   font-size: 0.88rem;
   line-height: 1.7;
-  color: rgba(230, 237, 239, 0.82);
+  color: var(--dga-muted);
 }
 
-/* ===== أزرار التحريك (يمين / يسار) ===== */
 .speakers-controls {
   display: flex;
   justify-content: center;
@@ -147,18 +140,18 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background-color: #ffffff;
-  color: #2f8f46;
-  border: 2px solid #2f8f46;
+  background-color: var(--dga-surface);
+  color: var(--dga-primary);
+  border: 1.5px solid var(--dga-primary);
   font-size: 1.1rem;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(18, 57, 60, 0.08);
+  box-shadow: var(--dga-shadow);
   transition: background-color 0.22s ease, color 0.22s ease, transform 0.15s ease;
 }
 
 .speakers-nav:hover,
 .speakers-nav:focus-visible {
-  background-color: #2f8f46;
+  background-color: var(--dga-primary);
   color: #ffffff;
   outline: none;
 }
@@ -167,7 +160,6 @@
   transform: scale(0.94);
 }
 
-/* ===== الاستجابة ===== */
 @media (max-width: 575.98px) {
   .speakers-section {
     padding-top: 60px;

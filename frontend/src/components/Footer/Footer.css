@@ -1,11 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap");
-
-/* ===== الفوتر ===== */
+/* ===== الفوتر (خلفية خضراء رسمية بأسلوب سعودي) ===== */
 .site-footer {
-  font-family: "Cairo", system-ui, "Segoe UI", sans-serif;
-  background-color: #1a2c30;
-  color: #ffffff;
+  font-family: var(--dga-font);
+  /* أخضر داكن احترافي مع تدرّج خفيف */
+  background: linear-gradient(180deg, #145c3d 0%, #0f5132 100%);
+  color: rgba(255, 255, 255, 0.85);
   padding-top: 64px;
+  border-top: 4px solid #1b8354;
 }
 
 /* ===== الأعمدة (شبكة Bootstrap) ===== */
@@ -13,15 +13,27 @@
   min-width: 0;
 }
 
+/* نفس شعار الهيدر (Main_Logo) داخل بطاقة بيضاء ليبقى واضحاً فوق الأخضر */
+.footer-logo-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 0.6rem 0.9rem;
+  margin-bottom: 1.1rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
 .footer-logo {
-  height: 64px;
+  height: 60px;
   width: auto;
   object-fit: contain;
-  margin-bottom: 1.1rem;
+  display: block;
 }
 
 .footer-brand-title {
-  margin: 0 0 0.9rem;
+  margin: 0 0 0.4rem;
   font-size: 1.1rem;
   font-weight: 700;
   line-height: 1.7;
@@ -29,11 +41,11 @@
 }
 
 .footer-brand-desc {
-  margin: 0;
+  margin: 0.6rem 0 0;
   font-size: 0.92rem;
   font-weight: 400;
   line-height: 2;
-  color: rgba(230, 237, 239, 0.72);
+  color: rgba(255, 255, 255, 0.78);
   max-width: 360px;
 }
 
@@ -55,7 +67,7 @@
   width: 42px;
   height: 3px;
   border-radius: 999px;
-  background-color: #7ac17d;
+  background-color: #7ddca8;
 }
 
 /* ===== روابط التنقل ===== */
@@ -69,7 +81,7 @@
 }
 
 .footer-link {
-  color: rgba(230, 237, 239, 0.78);
+  color: rgba(255, 255, 255, 0.82);
   text-decoration: none;
   font-size: 0.95rem;
   display: inline-block;
@@ -77,8 +89,8 @@
 }
 
 .footer-link:hover,
-.footer-link:focus {
-  color: #7ac17d;
+.footer-link:focus-visible {
+  color: #ffffff;
   transform: translateX(-6px);
 }
 
@@ -106,16 +118,16 @@
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #7ac17d;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
   font-size: 1rem;
 }
 
 .footer-contact-text {
   font-size: 0.92rem;
   line-height: 1.7;
-  color: rgba(230, 237, 239, 0.82);
+  color: rgba(255, 255, 255, 0.82);
 }
 
 /* ===== الشريط السفلي ===== */
@@ -126,13 +138,13 @@
   gap: 1.25rem;
   flex-wrap: wrap;
   padding: 1.6rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .footer-copy {
   margin: 0;
   font-size: 0.86rem;
-  color: rgba(230, 237, 239, 0.65);
+  color: rgba(255, 255, 255, 0.72);
 }
 
 /* ===== الأيقونات الاجتماعية ===== */
@@ -151,19 +163,18 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   color: #ffffff;
   font-size: 1.05rem;
   text-decoration: none;
-  transition: background-color 0.22s ease, color 0.22s ease,
-    transform 0.22s ease;
+  transition: background-color 0.22s ease, color 0.22s ease, transform 0.22s ease;
 }
 
 .footer-social:hover,
-.footer-social:focus {
-  background-color: #7ac17d;
-  color: #1a2c30;
+.footer-social:focus-visible {
+  background-color: #ffffff;
+  color: #0f5132;
   transform: translateY(-3px);
 }
 

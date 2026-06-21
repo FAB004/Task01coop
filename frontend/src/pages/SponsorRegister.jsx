@@ -78,7 +78,7 @@ export default function SponsorRegister() {
       <section className="sponsor-hero" dir="rtl">
         <div className="sponsor-hero-pattern" aria-hidden="true">
           <svg viewBox="0 0 470 800" preserveAspectRatio="xMaxYMid slice" xmlns="http://www.w3.org/2000/svg">
-            <g fill="none" stroke="#6fb6c2" strokeWidth="1.4" strokeLinecap="round">
+            <g fill="none" stroke="#9ed6c4" strokeWidth="1.4" strokeLinecap="round">
               {PATTERN_LINES.map((d, idx) => (
                 <path key={idx} d={d} />
               ))}

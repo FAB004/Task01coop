@@ -6,9 +6,9 @@ import {
   FaEnvelope,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import logo from "../../assets/footerLogo.png";
+import logo from "../../assets/Main_Logo.png";
 import "./Footer.css";
-import "../../assets/Logo01.png";
+
 const NAV_LINKS = [
   { label: "الرئيسية", href: "#home" },
   { label: "عن المؤتمر", href: "#about" },
@@ -35,7 +35,9 @@ export default function Footer() {
         <div className="row g-4 pb-4">
           {/* العمود: الشعار والوصف */}
           <div className="footer-col footer-brand col-12 col-lg-5">
-            <img src={logo} className="Logo01.png" alt="شعار المؤتمر" /> 
+            <span className="footer-logo-chip">
+              <img src={logo} className="footer-logo" alt="شعار المؤتمر" />
+            </span>
             <h3 className="footer-brand-title">
            المؤتمر الإقليمي الأول للري والصرف   
             </h3 >

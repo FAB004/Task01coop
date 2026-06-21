@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { DgaTextInput, DgaTextarea, DgaButtonV2, DgaInlineAlert } from "platformscode-new-react";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import "./IndividualRegister.css";
@@ -29,7 +30,11 @@ export default function IndividualRegister() {
   const [form, setForm] = useState(INITIAL);
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  // مفتاح لإعادة تركيب النموذج بعد الإرسال الناجح (يُفرّغ حقول مكوّنات المكتبة).
+  const [formKey, setFormKey] = useState(0);
+  const formRef = useRef(null);
 
+  // مكوّنات الإدخال من المكتبة تمرّر حدث <input> الداخلي، فيعمل name/value كالعادي.
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -59,6 +64,7 @@ export default function IndividualRegister() {
     if (Object.keys(next).length === 0) {
       setSubmitted(true);
       setForm(INITIAL);
+      setFormKey((k) => k + 1);
     }
   };
 
@@ -66,11 +72,10 @@ export default function IndividualRegister() {
     <div className="app-page" dir="rtl">
       <Header />
 
-      {/* ===== الهيرو ===== */}
       <section className="individual-hero" dir="rtl">
         <div className="individual-hero-pattern" aria-hidden="true">
           <svg viewBox="0 0 470 800" preserveAspectRatio="xMaxYMid slice" xmlns="http://www.w3.org/2000/svg">
-            <g fill="none" stroke="#6fb6c2" strokeWidth="1.4" strokeLinecap="round">
+            <g fill="none" stroke="#9ed6c4" strokeWidth="1.4" strokeLinecap="round">
               {PATTERN_LINES.map((d, idx) => (
                 <path key={idx} d={d} />
               ))}
@@ -81,14 +86,11 @@ export default function IndividualRegister() {
         <div className="container individual-hero-inner">
           <h1 className="individual-hero-title">تسجيل الأفراد</h1>
           <p className="individual-hero-subtitle">
-            سجّل حضورك في المؤتمر الإقليمي للري والصرف الزراعي، وكن جزءاً من نخبة
-            المختصين وصنّاع القرار. أكمل بياناتك أدناه لحجز مقعدك في فعاليات
-            المؤتمر وورش العمل.
+            سجّل حضورك في المؤتمر الإقليمي للري والصرف الزراعي
           </p>
         </div>
       </section>
 
-      {/* ===== نموذج التسجيل ===== */}
       <section className="individual-form-section" dir="rtl">
         <div className="container">
           <div className="individual-card card border-0">
@@ -99,112 +101,112 @@ export default function IndividualRegister() {
               </p>
 
               {submitted && (
-                <div className="alert alert-conf-success text-center fw-semibold" role="status">
-                  تم تسجيلك بنجاح! نتطلع لرؤيتك في المؤتمر.
+                <div className="mb-4">
+                  <DgaInlineAlert
+                    type="success"
+                    colored
+                    leadText="تم تسجيلك بنجاح! نتطلع لرؤيتك في المؤتمر."
+                  />
                 </div>
               )}
 
-              <form className="row g-3" onSubmit={handleSubmit} noValidate>
+              <form
+                key={formKey}
+                ref={formRef}
+                className="row g-3"
+                onSubmit={handleSubmit}
+                noValidate
+              >
                 <div className="col-12">
-                  <label htmlFor="name" className="form-label">الاسم الكامل *</label>
-                  <input
-                    id="name"
+                  <DgaTextInput
                     name="name"
-                    type="text"
-                    className={`form-control ${errors.name ? "is-invalid" : ""}`}
-                    value={form.name}
-                    onChange={handleChange}
+                    label="الاسم الكامل"
+                    required
+                    fullwidth
                     placeholder="أدخل اسمك الكامل"
+                    error={!!errors.name}
+                    helperText={errors.name || undefined}
+                    onInput={handleChange}
                   />
-                  {errors.name && <div className="invalid-feedback">{errors.name}</div>}
                 </div>
 
-                <div className="col-md-6">
-                  <label htmlFor="email" className="form-label">البريد الإلكتروني *</label>
-                  <input
-                    id="email"
+                <div className="col-md-6 ltr-field">
+                  <DgaTextInput
                     name="email"
-                    type="email"
-                    dir="ltr"
-                    className={`form-control ${errors.email ? "is-invalid" : ""}`}
-                    value={form.email}
-                    onChange={handleChange}
+                    label="البريد الإلكتروني"
+                    required
+                    fullwidth
+                    type="text"
                     placeholder="name@example.com"
+                    error={!!errors.email}
+                    helperText={errors.email || undefined}
+                    onInput={handleChange}
                   />
-                  {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                 </div>
 
-                <div className="col-md-6">
-                  <label htmlFor="phone" className="form-label">رقم الجوال *</label>
-                  <input
-                    id="phone"
+                <div className="col-md-6 ltr-field">
+                  <DgaTextInput
                     name="phone"
-                    type="tel"
-                    dir="ltr"
-                    className={`form-control ${errors.phone ? "is-invalid" : ""}`}
-                    value={form.phone}
-                    onChange={handleChange}
+                    label="رقم الجوال"
+                    required
+                    fullwidth
+                    type="text"
                     placeholder="+966 5X XXX XXXX"
+                    error={!!errors.phone}
+                    helperText={errors.phone || undefined}
+                    onInput={handleChange}
                   />
-                  {errors.phone && <div className="invalid-feedback">{errors.phone}</div>}
                 </div>
 
                 <div className="col-12">
-                  <label htmlFor="nationality" className="form-label">الجنسية</label>
-                  <input
-                    id="nationality"
+                  <DgaTextInput
                     name="nationality"
-                    type="text"
-                    className="form-control"
-                    value={form.nationality}
-                    onChange={handleChange}
+                    label="الجنسية"
+                    fullwidth
                     placeholder="أدخل الجنسية"
+                    onInput={handleChange}
                   />
                 </div>
 
                 <div className="col-md-6">
-                  <label htmlFor="organization" className="form-label">جهة العمل (اختياري)</label>
-                  <input
-                    id="organization"
+                  <DgaTextInput
                     name="organization"
-                    type="text"
-                    className="form-control"
-                    value={form.organization}
-                    onChange={handleChange}
+                    label="جهة العمل (اختياري)"
+                    fullwidth
                     placeholder="اسم جهة العمل"
+                    onInput={handleChange}
                   />
                 </div>
 
                 <div className="col-md-6">
-                  <label htmlFor="jobTitle" className="form-label">المسمى الوظيفي (اختياري)</label>
-                  <input
-                    id="jobTitle"
+                  <DgaTextInput
                     name="jobTitle"
-                    type="text"
-                    className="form-control"
-                    value={form.jobTitle}
-                    onChange={handleChange}
+                    label="المسمى الوظيفي (اختياري)"
+                    fullwidth
                     placeholder="المسمى الوظيفي"
+                    onInput={handleChange}
                   />
                 </div>
 
                 <div className="col-12">
-                  <label htmlFor="reason" className="form-label">سبب الحضور</label>
-                  <textarea
-                    id="reason"
+                  <DgaTextarea
                     name="reason"
-                    rows="4"
-                    className="form-control"
-                    value={form.reason}
-                    onChange={handleChange}
+                    label="سبب الحضور"
+                    fullwidth
+                    rows={4}
                     placeholder="اذكر سبب رغبتك في حضور المؤتمر..."
+                    onInput={handleChange}
                   />
                 </div>
 
-                <div className="col-12">
-                  <button type="submit" className="btn btn-primary btn-lg w-100 individual-submit">
-                    تسجيل
-                  </button>
+                <div className="col-12 d-grid mt-2">
+                  <DgaButtonV2
+                    className="individual-submit-btn"
+                    variant="primary"
+                    size="lg"
+                    label="تسجيل"
+                    onClick={() => formRef.current?.requestSubmit()}
+                  />
                 </div>
               </form>
             </div>

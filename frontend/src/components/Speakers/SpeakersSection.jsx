@@ -2,15 +2,13 @@ import { useRef } from "react";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import "./SpeakersSection.css";
 
-// بيانات المتحدثين — أضف عنصراً جديداً ليظهر تلقائياً في القائمة.
-// اترك "image" فارغاً الآن؛ يمكنك إضافة رابط الصورة لاحقاً.
 const SPEAKERS = [
-  { name: "", title: "خبير إدارة الموارد المائية", image: "" },
-  { name: "", title: "استشارية تقنيات الري الحديثة", image: "" },
-  { name: "د. خالد ", title: "أستاذ هندسة الري والصرف", image: "" },
-  { name: "", title: "مديرة مشاريع الاستدامة البيئية", image: "" },
-  { name: "د.  ", title: "باحث في كفاءة استهلاك المياه", image: "" },
-  { name: ".  ", title: "مهندسة   ", image: "" },
+  { name: "محمد", title: "   المائية", image: "" },
+  { name: "عمر", title: "استشاري تقنيات الري الحديثة", image: "" },
+  { name: "د. خالد ", title: " مهندس  ", image: "" },
+  { name: "", title: "مدير مشاريع  ", image: "" },
+  { name: "عبدالله", title: "مهندس  ", image: "" },
+  { name: "سعد", title: "مهندس   ", image: "" },
 ];
 
 const getInitials = (name) =>
@@ -19,7 +17,6 @@ const getInitials = (name) =>
 export default function SpeakersSection({ speakers = SPEAKERS }) {
   const trackRef = useRef(null);
 
-  // تمرير شريط المتحدثين بمقدار ~80% من عرضه (يتكيّف مع الاتجاه RTL تلقائياً)
   const scrollByCards = (direction) => {
     const track = trackRef.current;
     if (!track) return;
@@ -46,7 +43,6 @@ export default function SpeakersSection({ speakers = SPEAKERS }) {
                     loading="lazy"
                   />
                 ) : (
-                  // صورة بديلة فارغة — تُستبدل لاحقاً بصورة المتحدث
                   <span className="speaker-image-placeholder" aria-hidden="true">
                     {getInitials(speaker.name)}
                   </span>
@@ -61,7 +57,7 @@ export default function SpeakersSection({ speakers = SPEAKERS }) {
           ))}
         </div>
 
-        {/* أزرار تحريك المتحدثين: يمين / يسار */}
+  
         <div className="speakers-controls">
           <button
             type="button"
