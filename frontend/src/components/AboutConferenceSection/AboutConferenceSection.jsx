@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
-import aboutImg from "../../assets/irrr.jpg";
+
 import "./AboutConferenceSection.css";
 
 export default function AboutConferenceSection() {
+  // النص يُقرأ من المحتوى القابل للتحرير (localStorage) مع قيمة افتراضية.
+  const aboutText = getAbout();
   return (
     <section className="about-section" dir="rtl">
       <div className="container">
