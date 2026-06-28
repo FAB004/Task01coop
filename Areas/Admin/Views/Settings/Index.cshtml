@@ -1,0 +1,44 @@
+@model Task01.Models.ConferenceSettings
+@{
+    ViewData["Title"] = "وقت المؤتمر";
+}
+
+<h1 class="h3 mb-4">وقت المؤتمر</h1>
+
+<div class="card border-0 shadow-sm">
+    <div class="card-body p-4">
+        <form asp-area="Admin" asp-controller="Settings" asp-action="Index" method="post" class="row g-3">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+
+            <div class="col-md-6">
+                <label asp-for="ConferenceStartDate" class="form-label">تاريخ البداية</label>
+                <input asp-for="ConferenceStartDate" type="date" class="form-control" />
+                <span asp-validation-for="ConferenceStartDate" class="text-danger small"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="ConferenceStartTime" class="form-label">وقت البداية</label>
+                <input asp-for="ConferenceStartTime" type="time" class="form-control" />
+                <span asp-validation-for="ConferenceStartTime" class="text-danger small"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="ConferenceEndDate" class="form-label">تاريخ النهاية</label>
+                <input asp-for="ConferenceEndDate" type="date" class="form-control" />
+                <span asp-validation-for="ConferenceEndDate" class="text-danger small"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="ConferenceEndTime" class="form-label">وقت النهاية</label>
+                <input asp-for="ConferenceEndTime" type="time" class="form-control" />
+                <span asp-validation-for="ConferenceEndTime" class="text-danger small"></span>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-success">حفظ</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}----

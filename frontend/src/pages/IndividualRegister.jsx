@@ -30,6 +30,8 @@ export default function IndividualRegister() {
   const [form, setForm] = useState(INITIAL);
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   // مفتاح لإعادة تركيب النموذج بعد الإرسال الناجح (يُفرّغ حقول مكوّنات المكتبة).
   const [formKey, setFormKey] = useState(0);
   const formRef = useRef(null);
@@ -57,14 +59,32 @@ export default function IndividualRegister() {
     return next;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (submitting) return;
     const next = validate();
     setErrors(next);
-    if (Object.keys(next).length === 0) {
+    if (Object.keys(next).length > 0) return;
+
+    setSubmitting(true);
+    setSubmitError("");
+    try {
+      // أسماء الحقول تطابق IndividualRegistrationDto في الـ backend تماماً.
+      const res = await fetch("/api/registrations/individual", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      // نُظهر رسالة النجاح فقط بعد نجاح الحفظ في قاعدة البيانات.
       setSubmitted(true);
       setForm(INITIAL);
       setFormKey((k) => k + 1);
+    } catch {
+      setSubmitted(false);
+      setSubmitError("تعذّر إرسال التسجيل. يرجى المحاولة مرة أخرى لاحقاً.");
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -107,6 +127,12 @@ export default function IndividualRegister() {
                     colored
                     leadText="تم تسجيلك بنجاح! نتطلع لرؤيتك في المؤتمر."
                   />
+                </div>
+              )}
+
+              {submitError && (
+                <div className="alert alert-danger text-center fw-semibold mb-4" role="alert">
+                  {submitError}
                 </div>
               )}
 

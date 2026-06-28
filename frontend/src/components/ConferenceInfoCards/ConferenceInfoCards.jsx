@@ -1,5 +1,5 @@
 import { FaCalendarAlt, FaClock, FaMapMarkerAlt } from "react-icons/fa";
-import { getConferenceTime } from "../../data/conferenceStore";
+import { fetchConferenceTime, DEFAULT_CONFERENCE_TIME, useRemoteContent } from "../../data/conferenceStore";
 import "./ConferenceInfoCards.css";
 
 const AR_MONTHS = [
@@ -26,8 +26,8 @@ function formatArabicTime(time) {
 }
 
 export default function ConferenceInfoCards() {
-  // التاريخ والوقت يُقرآن من المحتوى القابل للتحرير (localStorage) مع قيم افتراضية.
-  const t = getConferenceTime();
+  // التاريخ والوقت يُجلبان من قاعدة البيانات عبر الـ API مع قيم افتراضية احتياطية.
+  const t = useRemoteContent(fetchConferenceTime, DEFAULT_CONFERENCE_TIME);
   const CARDS = [
     {
       icon: FaCalendarAlt,

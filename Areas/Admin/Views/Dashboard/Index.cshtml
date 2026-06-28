@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = "الرئيسية";
+}
+
+<h1 class="h3 mb-4">لوحة التحكم</h1>
+
+<div class="row g-3">
+    <div class="col-md-3">
+        <div class="card text-bg-success border-0 shadow-sm">
+            <div class="card-body">
+                <div class="fs-2 fw-bold">@ViewBag.IndividualCount</div>
+                <div>تسجيلات الأفراد</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-bg-primary border-0 shadow-sm">
+            <div class="card-body">
+                <div class="fs-2 fw-bold">@ViewBag.SponsorCount</div>
+                <div>طلبات الرعاية</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-bg-secondary border-0 shadow-sm">
+            <div class="card-body">
+                <div class="fs-2 fw-bold">@ViewBag.SpeakerCount</div>
+                <div>المتحدثون</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-bg-dark border-0 shadow-sm">
+            <div class="card-body">
+                <div class="fs-2 fw-bold">@ViewBag.AgendaCount</div>
+                <div>بنود الأجندة</div>
+            </div>
+        </div>
+    </div>
+</div>

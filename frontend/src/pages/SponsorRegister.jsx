@@ -36,6 +36,8 @@ export default function SponsorRegister() {
   const [form, setForm] = useState(INITIAL);
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -60,13 +62,31 @@ export default function SponsorRegister() {
     return next;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (submitting) return;
     const next = validate();
     setErrors(next);
-    if (Object.keys(next).length === 0) {
+    if (Object.keys(next).length > 0) return;
+
+    setSubmitting(true);
+    setSubmitError("");
+    try {
+      // أسماء الحقول تطابق SponsorRegistrationDto في الـ backend تماماً.
+      const res = await fetch("/api/registrations/sponsor", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      // نُظهر رسالة النجاح فقط بعد نجاح الحفظ في قاعدة البيانات.
       setSubmitted(true);
       setForm(INITIAL);
+    } catch {
+      setSubmitted(false);
+      setSubmitError("تعذّر إرسال الطلب. يرجى المحاولة مرة أخرى لاحقاً.");
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -96,7 +116,7 @@ export default function SponsorRegister() {
         </div>
       </section>
 
-      {/* ===== نموذج التسجيل ===== */}
+
       <section className="sponsor-form-section" dir="rtl">
         <div className="container">
           <div className="sponsor-card card border-0">
@@ -109,6 +129,12 @@ export default function SponsorRegister() {
               {submitted && (
                 <div className="alert alert-conf-success text-center fw-semibold" role="status">
                   تم إرسال طلبك بنجاح! شكراً لاهتمامك بالرعاية.
+                </div>
+              )}
+
+              {submitError && (
+                <div className="alert alert-danger text-center fw-semibold" role="alert">
+                  {submitError}
                 </div>
               )}
 
@@ -201,8 +227,8 @@ export default function SponsorRegister() {
                 </div>
 
                 <div className="col-12">
-                  <button type="submit" className="btn btn-primary btn-lg w-100 sponsor-submit">
-                    إرسال الطلب
+                  <button type="submit" className="btn btn-primary btn-lg w-100 sponsor-submit" disabled={submitting}>
+                    {submitting ? "جاري الإرسال..." : "إرسال الطلب"}
                   </button>
                 </div>
               </form>

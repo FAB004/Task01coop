@@ -1,0 +1,12 @@
+@model Task01.Models.AgendaItem
+@{
+    ViewData["Title"] = "إضافة بند";
+}
+
+<h1 class="h3 mb-4">إضافة بند للأجندة</h1>
+
+<partial name="_Form" model="Model" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

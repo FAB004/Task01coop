@@ -1,9 +1,9 @@
-import { getAgenda } from "../../data/conferenceStore";
+import { fetchAgenda, DEFAULT_AGENDA, useRemoteContent } from "../../data/conferenceStore";
 import "./AgendaSection.css";
 
 export default function AgendaSection() {
-  // الأجندة تُقرأ من المحتوى القابل للتحرير (localStorage) مع قيمة افتراضية.
-  const DAYS = getAgenda();
+  // الأجندة تُجلب من قاعدة البيانات عبر الـ API مع قيمة افتراضية احتياطية.
+  const DAYS = useRemoteContent(fetchAgenda, DEFAULT_AGENDA);
   return (
     <section id="agenda" className="agenda-section" dir="rtl">
       <div className="container">
