@@ -1,0 +1,45 @@
+@model Task01.Models.Speaker
+
+<div class="card border-0 shadow-sm">
+    <div class="card-body p-4">
+        <form method="post" enctype="multipart/form-data" class="row g-3">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+
+            <div class="col-md-6">
+                <label asp-for="Name" class="form-label">الاسم</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger small"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Title" class="form-label">المسمى</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger small"></span>
+            </div>
+            <div class="col-md-8">
+                <label class="form-label">صورة المتحدث (اختياري)</label>
+                <input type="file" name="imageFile" accept=".jpg,.jpeg,.png,.webp,image/*" class="form-control" />
+                <div class="form-text">الصيغ المسموحة: jpg، jpeg، png، webp — الحجم الأقصى 5 ميجابايت.</div>
+                <span class="text-danger small">@Html.ValidationMessage("imageFile")</span>
+                @* نحتفظ بالمسار الحالي حتى لا يُفقد عند الحفظ بدون رفع صورة جديدة *@
+                <input type="hidden" asp-for="ImagePath" />
+                @if (!string.IsNullOrEmpty(Model.ImagePath))
+                {
+                    <div class="mt-2">
+                        <span class="d-block text-muted small mb-1">الصورة الحالية:</span>
+                        <img src="@Model.ImagePath" alt="@Model.Name" style="max-height:90px;border-radius:8px;" />
+                    </div>
+                }
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Order" class="form-label">الترتيب</label>
+                <input asp-for="Order" type="number" class="form-control" />
+                <span asp-validation-for="Order" class="text-danger small"></span>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-success">حفظ</button>
+                <a class="btn btn-outline-secondary" asp-area="Admin" asp-controller="Speakers" asp-action="Index">رجوع</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { getConferenceStartISO } from "../../data/conferenceStore";
+import { fetchConferenceStartISO, DEFAULT_CONFERENCE_TIME } from "../../data/conferenceStore";
 import "./CountdownTimer.css";
 
 
-// التاريخ الافتراضي يُقرأ من المحتوى القابل للتحرير (localStorage) مع قيمة احتياطية.
-const CONFERENCE_DATE = getConferenceStartISO() || "2026-11-04T09:00:00";
+// قيمة احتياطية تُعرض فوراً ثم تُستبدل بتاريخ المؤتمر القادم من الـ API.
+const FALLBACK_DATE = `${DEFAULT_CONFERENCE_TIME.startDate}T${DEFAULT_CONFERENCE_TIME.startTime || "00:00"}:00`;
 
 const UNITS = [
   { key: "days", label: "يوم" },
@@ -25,13 +25,35 @@ function getRemaining(target) {
   };
 }
 
-export default function CountdownTimer({ targetDate = CONFERENCE_DATE }) {
-  const [time, setTime] = useState(() => getRemaining(targetDate));
+export default function CountdownTimer({ targetDate }) {
+  // التاريخ الفعلي: إمّا مُمرّر صراحةً، أو يُجلب من الـ API، أو القيمة الاحتياطية.
+  const [resolvedDate, setResolvedDate] = useState(targetDate || FALLBACK_DATE);
+  const [time, setTime] = useState(() => getRemaining(targetDate || FALLBACK_DATE));
+
+  // اجلب تاريخ المؤتمر من قاعدة البيانات (ما لم يُمرّر targetDate صراحةً).
+  useEffect(() => {
+    if (targetDate) {
+      setResolvedDate(targetDate);
+      return;
+    }
+    let alive = true;
+    fetchConferenceStartISO()
+      .then((iso) => {
+        if (alive && iso) setResolvedDate(iso);
+      })
+      .catch(() => {
+        /* نُبقي القيمة الاحتياطية */
+      });
+    return () => {
+      alive = false;
+    };
+  }, [targetDate]);
 
   useEffect(() => {
-    const id = setInterval(() => setTime(getRemaining(targetDate)), 1000);
+    setTime(getRemaining(resolvedDate));
+    const id = setInterval(() => setTime(getRemaining(resolvedDate)), 1000);
     return () => clearInterval(id);
-  }, [targetDate]);
+  }, [resolvedDate]);
 
   return (
     <section className="countdown" dir="rtl">

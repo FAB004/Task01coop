@@ -1,0 +1,35 @@
+@model Task01.Models.AgendaItem
+
+<div class="card border-0 shadow-sm">
+    <div class="card-body p-4">
+        <form method="post" class="row g-3">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+
+            <div class="col-md-4">
+                <label asp-for="DayNumber" class="form-label">اليوم</label>
+                <input asp-for="DayNumber" type="number" min="1" class="form-control" />
+                <span asp-validation-for="DayNumber" class="text-danger small"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Time" class="form-label">الوقت</label>
+                <input asp-for="Time" class="form-control" placeholder="مثال: 09:00 - 10:00" />
+                <span asp-validation-for="Time" class="text-danger small"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Order" class="form-label">الترتيب</label>
+                <input asp-for="Order" type="number" class="form-control" />
+                <span asp-validation-for="Order" class="text-danger small"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Title" class="form-label">العنوان</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger small"></span>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-success">حفظ</button>
+                <a class="btn btn-outline-secondary" asp-area="Admin" asp-controller="Agenda" asp-action="Index">رجوع</a>
+            </div>
+        </form>
+    </div>
+</div>

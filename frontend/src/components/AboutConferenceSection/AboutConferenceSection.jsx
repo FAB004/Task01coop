@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { getAbout } from "../../data/conferenceStore";
+import { fetchAbout, DEFAULT_ABOUT, useRemoteContent } from "../../data/conferenceStore";
 import aboutImg from "../../assets/irrr.jpg";
 import "./AboutConferenceSection.css";
 
 export default function AboutConferenceSection() {
-  // النص يُقرأ من المحتوى القابل للتحرير (localStorage) مع قيمة افتراضية.
-  const aboutText = getAbout();
+  // النص يُجلب من قاعدة البيانات عبر الـ API مع قيمة افتراضية احتياطية.
+  const aboutText = useRemoteContent(fetchAbout, DEFAULT_ABOUT);
   return (
     <section className="about-section" dir="rtl">
       <div className="container">
@@ -23,17 +23,7 @@ export default function AboutConferenceSection() {
             <div className="about-text-wrap">
               <h2 className="about-section-title">عن المؤتمر</h2>
               <span className="about-section-divider" aria-hidden="true" />
-              <p className="about-section-text">
-                يُعد المؤتمر الإقليمي الأول للري والصرف الزراعي بالشرق الأوسط منصةً
-                علميةً ومهنيةً رائدةً تجمع نخبةً من الخبراء والمختصين وصنّاع القرار من
-                مختلف دول المنطقة، بهدف مناقشة التحديات المتزايدة التي تواجه قطاع
-                المياه والري، واستعراض أحدث الحلول والتقنيات المستدامة في مجال
-                الإدارة المتكاملة للموارد المائية. ويسعى المؤتمر إلى تعزيز التعاون
-                الإقليمي وتبادل الخبرات والمعارف بما يدعم تحقيق تنميةٍ زراعيةٍ مرنةٍ
-                ومستدامةٍ قادرةٍ على مواجهة آثار التغير المناخي وندرة المياه. كما
-                يوفّر المؤتمر فرصةً لعرض المشروعات الناجحة والممارسات الفضلى، وبناء
-                شراكاتٍ استراتيجيةٍ بين القطاعين العام والخاص.
-              </p>
+              <p className="about-section-text">{aboutText}</p>
               <Link to="/about" className="dga-btn dga-btn-outline">
                 اقرأ المزيد
               </Link>

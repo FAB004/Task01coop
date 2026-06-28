@@ -1,13 +1,16 @@
 import { useRef } from "react";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
-import { getSpeakers } from "../../data/conferenceStore";
+import { fetchSpeakers, DEFAULT_SPEAKERS, useRemoteContent } from "../../data/conferenceStore";
 import "./SpeakersSection.css";
 
 const getInitials = (name) =>
   (name || "").replace(/^(د\.|م\.|أ\.)\s*/, "").trim().charAt(0) || "؟";
 
-// قائمة المتحدثين تُقرأ من المحتوى القابل للتحرير (localStorage) مع قيمة افتراضية.
-export default function SpeakersSection({ speakers = getSpeakers() }) {
+// قائمة المتحدثين تُجلب من قاعدة البيانات عبر الـ API مع قيمة افتراضية احتياطية.
+// (يمكن تمرير speakers صراحةً لتجاوز الجلب.)
+export default function SpeakersSection({ speakers }) {
+  const remote = useRemoteContent(fetchSpeakers, DEFAULT_SPEAKERS);
+  const list = speakers || remote;
   const trackRef = useRef(null);
 
   const scrollByCards = (direction) => {
@@ -25,7 +28,7 @@ export default function SpeakersSection({ speakers = getSpeakers() }) {
         </header>
 
         <div className="speakers-track" role="list" ref={trackRef}>
-          {speakers.map((speaker, index) => (
+          {list.map((speaker, index) => (
             <article className="speaker-card" role="listitem" key={index}>
               <div className="speaker-image-wrap">
                 {speaker.image ? (

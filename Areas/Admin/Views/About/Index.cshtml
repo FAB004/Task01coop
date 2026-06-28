@@ -1,0 +1,27 @@
+@model Task01.Models.AboutConference
+@{
+    ViewData["Title"] = "عن المؤتمر";
+}
+
+<h1 class="h3 mb-4">عن المؤتمر</h1>
+
+<div class="card border-0 shadow-sm">
+    <div class="card-body p-4">
+        <form asp-area="Admin" asp-controller="About" asp-action="Index" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label asp-for="ContentAr" class="form-label">النص (بالعربية)</label>
+                <textarea asp-for="ContentAr" class="form-control" rows="10"></textarea>
+                <span asp-validation-for="ContentAr" class="text-danger small"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success">حفظ</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

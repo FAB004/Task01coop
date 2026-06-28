@@ -1,0 +1,41 @@
+@model List<Task01.Models.Speaker>
+@{
+    ViewData["Title"] = "المتحدثون";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">المتحدثون</h1>
+    <a class="btn btn-success" asp-area="Admin" asp-controller="Speakers" asp-action="Create"><i class="bi bi-plus-lg"></i> إضافة متحدث</a>
+</div>
+
+<div class="card border-0 shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-striped align-middle mb-0">
+            <thead class="table-light">
+                <tr><th>الاسم</th><th>المسمى</th><th>الصورة</th><th>الترتيب</th><th></th></tr>
+            </thead>
+            <tbody>
+            @if (Model.Count == 0)
+            {
+                <tr><td colspan="5" class="text-center text-muted py-4">لا يوجد متحدثون.</td></tr>
+            }
+            @foreach (var s in Model)
+            {
+                <tr>
+                    <td>@s.Name</td>
+                    <td>@s.Title</td>
+                    <td dir="ltr">@s.ImagePath</td>
+                    <td>@s.Order</td>
+                    <td class="text-end">
+                        <a class="btn btn-sm btn-outline-primary" asp-area="Admin" asp-controller="Speakers" asp-action="Edit" asp-route-id="@s.Id">تعديل</a>
+                        <form asp-area="Admin" asp-controller="Speakers" asp-action="Delete" asp-route-id="@s.Id" method="post" class="d-inline" onsubmit="return confirm('حذف هذا المتحدث؟');">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-sm btn-outline-danger">حذف</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
